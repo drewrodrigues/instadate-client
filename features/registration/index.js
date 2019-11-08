@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, ScrollView, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, View } from 'react-native';
 import * as Utils from './utils';
+import Logo from '../../assets/logo.png';
 
 export default function Registration() {
   const [errors, setErrors] = useState([]);
@@ -92,7 +93,7 @@ export default function Registration() {
   return (
     <View style={styles.container}>
       <ScrollView styles={styles.scrollView}>
-        <Text style={styles.title}>Instadate</Text>
+        <Image source={Logo} style={styles.title} />
 
         {/* Errors */}
         {errors.map((error, i) => (
@@ -214,9 +215,10 @@ export default function Registration() {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'stretch',
-    backgroundColor: '#222',
+    backgroundColor: '#111',
     flex: 1,
     padding: 20,
+    paddingTop: 0
   },
   scrollView: {
     borderColor: 'red',
@@ -228,11 +230,8 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   title: {
-    color: 'white',
-    fontSize: 72,
-    marginBottom: 50,
-    marginTop: 20,
-    textAlign: 'center'
+    resizeMode: 'contain',
+    width: '100%'
   },
   error: {
     backgroundColor: 'red',
