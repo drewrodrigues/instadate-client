@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Registration from "./features/registration";
-import axios from 'axios';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import SignUp from './features/signUp';
+import Login from './features/login';
+import Landing from './features/pages/landing';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Registration />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: 'stretch',
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const MainNavigator = createStackNavigator({
+  Landing: { screen: Landing },
+  SignUp: { screen: SignUp },
+  Login: { screen: Login }
+}, {
+  // headerMode: 'none' // comment out when need to go `back`
 });
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
