@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Registration from "./components/registration";
+import axios from 'axios';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Registration />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    alignSelf: 'stretch',
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
