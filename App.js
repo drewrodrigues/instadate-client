@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Registration from "./components/registration";
+import Registration from "./features/registration";
 import axios from 'axios';
 
 export default function App() {
