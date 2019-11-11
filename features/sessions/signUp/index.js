@@ -57,7 +57,7 @@ export default function Registration() {
   ];
 
   function handleSubmit(e) {
-    Utils.SignUp({
+    Utils.signUp({
       email,
       password,
       sex,

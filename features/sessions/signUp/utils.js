@@ -1,11 +1,7 @@
-import axios from 'axios';
+import axios from '../../../config/axios';
 
-const instance = axios.create({
-  baseURL: 'http://10.0.0.64:3000'
-});
-
-export function SignUp(user) {
-  return instance({
+export function signUp(user) {
+  return axios({
     method: 'post',
     url: '/users',
     data: { user }
