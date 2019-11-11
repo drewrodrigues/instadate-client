@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import SignUp from './features/signUp';
-import Login from './features/login';
+import SignUp from './features/sessions/signUp';
+import Login from './features/sessions/login';
 import Landing from './features/pages/landing';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';

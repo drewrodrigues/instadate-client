@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://10.0.0.64:3001'
+  baseURL: 'http://10.0.0.64:3000'
 });
 
 export function SignUp(user) {

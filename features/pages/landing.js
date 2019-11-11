@@ -1,13 +1,14 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LandingBackground from '../../assets/landing.png';
+import BackgroundImage from "../../components/backgroundImage";
 
 export default function Landing(props) {
   const { navigate } = props.navigation;
 
   return (
     <View style={styles.container}>
-      <Image source={LandingBackground} style={styles.background} />
+      <BackgroundImage image={LandingBackground} />
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -50,14 +51,5 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     textAlign: 'center'
-  },
-  background: {
-    left: 0,
-    position: 'absolute',
-    resizeMode: 'cover',
-    top: 0,
-    bottom: 0,
-    width: '100%',
-    height: '100%',
   }
 });
