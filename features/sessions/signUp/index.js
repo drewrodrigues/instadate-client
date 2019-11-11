@@ -19,43 +19,6 @@ export default function Registration() {
   const [age, setAge] = useState('');
   const [location, setLocation] = useState('');
 
-  const sexOptions = [
-    {
-      name: 'man',
-      backgroundColor: '#3498db'
-    },
-    {
-      name: 'woman',
-      backgroundColor: '#e74c3c'
-    }
-  ];
-
-  const interestedInOptions = [
-    {
-      name: 'men',
-      backgroundColor: '#3498db'
-    },
-    {
-      name: 'women',
-      backgroundColor: '#e74c3c'
-    }
-  ];
-
-  const lookingForOptions = [
-    {
-      name: 'dating',
-      backgroundColor: '#2ecc71'
-    },
-    {
-      name: 'hookups',
-      backgroundColor: '#e74c3c'
-    },
-    {
-      name: 'relationship',
-      backgroundColor: '#8e44ad'
-    }
-  ];
-
   function handleSubmit(e) {
     Utils.signUp({
       email,
@@ -65,7 +28,8 @@ export default function Registration() {
       location,
       age,
       outcome: lookingFor,
-      bio
+      bio,
+      name
     }).catch(err => {
       setErrors(err.response.data);
     });
