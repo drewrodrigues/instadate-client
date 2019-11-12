@@ -26,10 +26,8 @@ function Navigation(props) {
   });
 
   if (props.loggedIn) {
-    console.log('Tabs nav');
     Navigation = Tabs;
   } else {
-    console.log('Stack nav');
     Navigation = Stack;
   }
 
