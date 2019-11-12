@@ -1,25 +1,6 @@
 import React from 'react';
-
-// navigation ------------------------------------------------------------------
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
-const Stack = createStackNavigator({
-  Landing: { screen: Landing },
-  SignUp: { screen: SignUp },
-  Login: { screen: Login }
-}, {
-  // headerMode: 'none' // comment out when need to go `back`
-});
-
-const Navigator = createAppContainer(Stack);
-
-// components ------------------------------------------------------------------
-import SignUp from './features/session/signUp';
-import Login from './features/session/login';
-import Landing from './features/pages/landing';
-
-// redux -----------------------------------------------------------------------
+import { connect } from 'react-redux';
+import Navigation from './components/navigation';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -32,10 +13,10 @@ const store = createStore(
 
 window.store = store;
 
-export default function App() {
+export default function App(props) {
   return (
     <Provider store={store}>
-      <Navigator />
+      <Navigation />
     </Provider>
   )
 }

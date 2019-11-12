@@ -1,24 +1,20 @@
 import React, { useState }  from 'react';
-import FormTextInput from '../../../components/formTextInput';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import BlankBackground from '../../../assets/blankBackground.png';
-import BackgroundImage from "../../../components/backgroundImage";
-import Logo from '../../../assets/logo.png';
-import FormButton from "../../../components/formButton";
-import {login} from "./util";
+import FormTextInput from '../../components/formTextInput';
+import { connect } from 'react-redux';
+import { Alert, Image, StyleSheet, View } from 'react-native';
+import BlankBackground from '../../assets/blankBackground.png';
+import BackgroundImage from "../../components/backgroundImage";
+import Logo from '../../assets/logo.png';
+import FormButton from "../../components/formButton";
+import { login } from './_actions';
 
-export default function Login(props) {
+function Login({ login }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleLogin() {
     login({ email, password })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err.response.data);
-      });
+    .catch(_ => Alert.alert('Failed to login'));
   }
 
   return (
@@ -65,3 +61,9 @@ const styles = StyleSheet.create({
     padding: 40
   }
 });
+
+const mapDispatchToProps = dispatch => ({
+  login: session => dispatch(login(session))
+});
+
+export default connect(null, mapDispatchToProps)(Login);

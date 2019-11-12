@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-native';
-import * as Utils from './utils';
-import Logo from '../../../assets/logo.png';
-import FormTextInput from "../../../components/formTextInput";
-import BlankBackground from "../../../assets/blankBackground.png";
-import BackgroundImage from "../../../components/backgroundImage";
-import FormButton from "../../../components/formButton";
+import { connect } from 'react-redux';
+import Logo from '../../assets/logo.png';
+import FormTextInput from "../../components/formTextInput";
+import BlankBackground from "../../assets/blankBackground.png";
+import BackgroundImage from "../../components/backgroundImage";
+import FormButton from "../../components/formButton";
+import { signUp } from "./_actions";
 
-export default function Registration() {
+function SignUp(props) {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,8 +20,8 @@ export default function Registration() {
   const [age, setAge] = useState('');
   const [location, setLocation] = useState('');
 
-  function handleSubmit(e) {
-    Utils.signUp({
+  function handleSubmit() {
+    props.signUp({
       email,
       password,
       sex,
@@ -30,9 +31,7 @@ export default function Registration() {
       outcome: lookingFor,
       bio,
       name
-    }).catch(err => {
-      setErrors(err.response.data);
-    });
+    }).catch(errorMessages => setErrors(errorMessages));
   }
 
   return (
@@ -240,3 +239,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   }
 });
+
+const mapDispatchToProps = dispatch => ({
+  signUp: user => dispatch(signUp(user))
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

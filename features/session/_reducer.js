@@ -1,4 +1,5 @@
-import { CLEAR_SESSION, RECEIVE_SESSION } from "./_actions";
+import { RECEIVE_SESSION } from "./_actions";
+import { CLEAR_SESSION } from "../settings/_actions";
 
 export default function(oldState = {}, action) {
   Object.freeze(oldState);

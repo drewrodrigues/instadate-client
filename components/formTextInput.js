@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, View } from "react-native";
+import { Text, TextInput, StyleSheet, View } from 'react-native';
 
 export default function FormTextInput({
   placeholder,

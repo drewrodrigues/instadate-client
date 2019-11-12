@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LandingBackground from '../../assets/landing.png';
 import BackgroundImage from "../../components/backgroundImage";
 
