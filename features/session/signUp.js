@@ -7,6 +7,7 @@ import BlankBackground from "../../assets/blankBackground.png";
 import BackgroundImage from "../../components/backgroundImage";
 import FormButton from "../../components/formButton";
 import { signUp } from "./_actions";
+import BackButton from "../../components/backButton";
 
 function SignUp(props) {
   const [errors, setErrors] = useState([]);
@@ -36,6 +37,7 @@ function SignUp(props) {
 
   return (
     <View style={styles.container}>
+      <BackButton {...props} />
       <BackgroundImage image={BlankBackground} />
 
       {/* Errors */}

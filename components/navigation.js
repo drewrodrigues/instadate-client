@@ -17,7 +17,7 @@ function Navigation(props) {
     Landing: { screen: Landing },
     SignUp: { screen: SignUp },
     Login: { screen: Login },
-  });
+  }, { headerMode: 'none' });
 
   const Tabs = createBottomTabNavigator({
     Search: Search,
