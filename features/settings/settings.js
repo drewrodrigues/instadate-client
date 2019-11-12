@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
-import { clearSession, logout } from "./_actions";
+import { logout } from "./_actions";
 
 function Settings(props) {
   console.log(props);
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(clearSession)
+  logout: () => dispatch(logout())
 });
 
 export default connect(null, mapDispatchToProps)(Settings);

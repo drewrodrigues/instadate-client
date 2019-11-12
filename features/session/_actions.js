@@ -1,4 +1,5 @@
 import axios from "../../config/axios";
+import { AsyncStorage } from 'react-native';
 
 export const RECEIVE_SESSION = 'RECEIVE_SESSION';
 
@@ -18,6 +19,7 @@ export const signUp = user => dispatch => {
   .then(res => {
     dispatch(receiveSession(res.data));
     dispatch({ type: 'SIGN_UP_SUCCESS' });
+    _storeSession(res.data);
     return Promise.resolve(res.data);
   })
   .catch(err => {
@@ -37,6 +39,7 @@ export const login = session => dispatch => {
   .then(res => {
     dispatch(receiveSession(res.data));
     dispatch({ type: 'LOGIN_SUCCESS' });
+    _storeSession(res.data);
     return Promise.resolve(res.data);
   })
   .catch(err => {
@@ -44,3 +47,8 @@ export const login = session => dispatch => {
     return Promise.reject(err.response.data)
   });
 };
+
+// helpers
+async function _storeSession(session) {
+  await AsyncStorage.setItem('@session', JSON.stringify(session));
+}

@@ -25,8 +25,6 @@ function Navigation(props) {
     Settings: Settings
   });
 
-  console.log(window.store.getState().session);
-
   if (props.loggedIn) {
     console.log('Tabs nav');
     Navigation = Tabs;
