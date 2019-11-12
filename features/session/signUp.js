@@ -8,6 +8,8 @@ import BackgroundImage from "../../components/backgroundImage";
 import FormButton from "../../components/formButton";
 import { signUp } from "./_actions";
 import BackButton from "../../components/backButton";
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 
 function SignUp(props) {
   const [errors, setErrors] = useState([]);
@@ -20,6 +22,7 @@ function SignUp(props) {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [location, setLocation] = useState('');
+  const [picture, setPicture] = useState({});
 
   function handleSubmit() {
     props.signUp({
@@ -31,8 +34,15 @@ function SignUp(props) {
       age,
       outcome: lookingFor,
       bio,
-      name
+      name,
+      picture: picture.base64
     }).catch(errorMessages => setErrors(errorMessages));
+  }
+
+  async function launchImageLibrary() {
+    const permission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const response = await ImagePicker.launchImageLibraryAsync({ base64: true });
+    setPicture(response);
   }
 
   return (
@@ -40,17 +50,25 @@ function SignUp(props) {
       <BackButton {...props} />
       <BackgroundImage image={BlankBackground} />
 
+      <Image source={Logo} style={styles.logo} />
+
       {/* Errors */}
-      <View style={styles.errorContainer}>
-        {errors.map((error, i) => (
-          <Text key={i} style={styles.error}>{error}</Text>
-        ))}
-      </View>
+      {errors.length !== 0 && (
+        <View style={styles.errorContainer}>
+          {errors.map((error, i) => (
+            <Text key={i} style={styles.error}>{error}</Text>
+          ))}
+        </View>
+      )}
 
       <ScrollView styles={styles.scrollView}>
         <View style={styles.formContainer}>
-          <Image source={Logo} style={styles.title} />
 
+          {/* Profile Picture */}
+          <Image source={{ uri: picture.uri }} style={styles.profilePicture} />
+          <TouchableOpacity onPress={launchImageLibrary}>
+            <Text style={styles.profilePictureText}>Select a photo...</Text>
+          </TouchableOpacity>
 
           {/* Email */}
           <FormTextInput
@@ -165,26 +183,40 @@ function SignUp(props) {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'stretch',
     backgroundColor: '#111',
     flex: 1,
-    paddingTop: 0
   },
   formContainer: {
-    padding: 40
+    padding: 40,
   },
   scrollView: {
-    borderColor: 'red',
-    borderWidth: 1,
-    flex: 1
+    flex: 1,
   },
   iAmLabel: {
     color: 'white',
     marginBottom: 10
   },
-  title: {
+  profilePicture: {
+    alignSelf: 'center',
+    backgroundColor: '#ccc',
+    borderColor: 'white',
+    borderWidth: 10,
+    resizeMode: 'cover',
+    height: 300,
+    width: 300,
+    borderRadius: 150,
+  },
+  profilePictureText: {
+    color: 'white',
+    padding: 20,
+    textAlign: 'center'
+  },
+  logo: {
+    alignSelf: 'center',
+    marginTop: 50,
+    height: 100,
+    width: 200,
     resizeMode: 'contain',
-    width: '100%'
   },
   errorContainer: {
     padding: 40
