@@ -7,6 +7,8 @@ import thunk from 'redux-thunk';
 import sessionReducer from './features/session/_reducer';
 import { AsyncStorage } from 'react-native';
 
+console.disableYellowBox = true;
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
