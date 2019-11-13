@@ -18,6 +18,7 @@ import BackButton from "../../components/backButton";
 // functions
 import { signUp } from "./_actions";
 import { uploadImage } from "../imageUpload/_actions";
+import PictureVerificationTag from "../../components/pictureVerificationTag";
 
 function SignUp(props) {
   const [errors, setErrors] = useState([]);
@@ -31,7 +32,7 @@ function SignUp(props) {
   const [age, setAge] = useState('');
   const [location, setLocation] = useState('');
   const [picture, setPicture] = useState({}); // to store the file for placeholder
-  const [uploadedImage, setUploadedImage] = useState(null); // for posting
+  const [uploadedImage, setUploadedImage] = useState({}); // for posting
 
   function handleSubmit() {
     props.signUp({
@@ -81,7 +82,8 @@ function SignUp(props) {
             <Image source={{ uri: picture.uri }} style={styles.profilePicture} />
             { uploadedImage && (
               <View style={styles.pendingVerification}>
-                <Text style={styles.pendingVerificationText}>Pending Verification</Text>
+                <PictureVerificationTag verified={uploadedImage.verified} />
+                {/*<Text style={styles.pendingVerificationText}>Pending Verification</Text>*/}
               </View>
             )}
             <TouchableOpacity onPress={launchImageLibrary}>
@@ -219,18 +221,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   pendingVerification: {
-    backgroundColor: 'red',
-    borderRadius: 10,
-    padding: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
     position: 'absolute',
     top: 0,
-    textAlign: 'center'
-  },
-  pendingVerificationText: {
-    color: 'white',
-    fontSize: 12
   },
   profilePicture: {
     alignSelf: 'center',
