@@ -10,6 +10,7 @@ import { signUp } from "./_actions";
 import BackButton from "../../components/backButton";
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import { uploadImage } from "../imageUpload/_actions";
 
 function SignUp(props) {
   const [errors, setErrors] = useState([]);
@@ -22,7 +23,8 @@ function SignUp(props) {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [location, setLocation] = useState('');
-  const [picture, setPicture] = useState({});
+  const [picture, setPicture] = useState({}); // to store the file for placeholder
+  const [uploadedImageId, setUploadedImageId] = useState(null); // for posting
 
   function handleSubmit() {
     props.signUp({
@@ -35,13 +37,16 @@ function SignUp(props) {
       outcome: lookingFor,
       bio,
       name,
-      picture: picture.base64
+      picture_id: uploadedImageId
     }).catch(errorMessages => setErrors(errorMessages));
   }
 
   async function launchImageLibrary() {
     const permission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     const response = await ImagePicker.launchImageLibraryAsync({ base64: true });
+    const fileName = response.uri.replace(/.*ImagePicker\//, '');
+    const uploadedImage = await uploadImage({ file: response.base64, file_name: fileName });
+    setUploadedImageId(uploadedImage.data.id);
     setPicture(response);
   }
 
