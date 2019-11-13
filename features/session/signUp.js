@@ -70,10 +70,17 @@ function SignUp(props) {
         <View style={styles.formContainer}>
 
           {/* Profile Picture */}
-          <Image source={{ uri: picture.uri }} style={styles.profilePicture} />
-          <TouchableOpacity onPress={launchImageLibrary}>
-            <Text style={styles.profilePictureText}>Select a photo...</Text>
-          </TouchableOpacity>
+          <View style={styles.profilePictureContainer}>
+            <Image source={{ uri: picture.uri }} style={styles.profilePicture} />
+            { uploadedImage && (
+              <View style={styles.pendingVerification}>
+                <Text style={styles.pendingVerificationText}>Pending Verification</Text>
+              </View>
+            )}
+            <TouchableOpacity onPress={launchImageLibrary}>
+              <Text style={styles.profilePictureText}>Select a photo...</Text>
+            </TouchableOpacity>
+          </View>
 
           {/* Email */}
           <FormTextInput
@@ -200,6 +207,23 @@ const styles = StyleSheet.create({
   iAmLabel: {
     color: 'white',
     marginBottom: 10
+  },
+  profilePictureContainer: {
+    alignItems: 'center'
+  },
+  pendingVerification: {
+    backgroundColor: 'red',
+    borderRadius: 10,
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    position: 'absolute',
+    top: 0,
+    textAlign: 'center'
+  },
+  pendingVerificationText: {
+    color: 'white',
+    fontSize: 12
   },
   profilePicture: {
     alignSelf: 'center',
