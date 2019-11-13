@@ -1,15 +1,22 @@
+// dependencies
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import Logo from '../../assets/logo.png';
-import FormTextInput from "../../components/formTextInput";
-import BlankBackground from "../../assets/blankBackground.png";
-import BackgroundImage from "../../components/backgroundImage";
-import FormButton from "../../components/formButton";
-import { signUp } from "./_actions";
-import BackButton from "../../components/backButton";
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+
+// assets
+import BlankBackground from "../../assets/blankBackground.png";
+import Logo from '../../assets/logo.png';
+
+// components
+import FormTextInput from "../../components/formTextInput";
+import BackgroundImage from "../../components/backgroundImage";
+import FormButton from "../../components/formButton";
+import BackButton from "../../components/backButton";
+
+// functions
+import { signUp } from "./_actions";
 import { uploadImage } from "../imageUpload/_actions";
 
 function SignUp(props) {
