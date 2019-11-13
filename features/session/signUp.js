@@ -24,7 +24,7 @@ function SignUp(props) {
   const [age, setAge] = useState('');
   const [location, setLocation] = useState('');
   const [picture, setPicture] = useState({}); // to store the file for placeholder
-  const [uploadedImageId, setUploadedImageId] = useState(null); // for posting
+  const [uploadedImage, setUploadedImage] = useState(null); // for posting
 
   function handleSubmit() {
     props.signUp({
@@ -37,7 +37,7 @@ function SignUp(props) {
       outcome: lookingFor,
       bio,
       name,
-      picture_id: uploadedImageId
+      picture_id: uploadedImage.id
     }).catch(errorMessages => setErrors(errorMessages));
   }
 
@@ -46,7 +46,7 @@ function SignUp(props) {
     const response = await ImagePicker.launchImageLibraryAsync({ base64: true });
     const fileName = response.uri.replace(/.*ImagePicker\//, '');
     const uploadedImage = await uploadImage({ file: response.base64, file_name: fileName });
-    setUploadedImageId(uploadedImage.data.id);
+    setUploadedImage(uploadedImage.data);
     setPicture(response);
   }
 
