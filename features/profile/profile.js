@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import PictureVerificationTag from "../../components/pictureVerificationTag";
 
 function Profile(props) {
-  console.log(props);
-
   return (
     <View>
       <View style={styles.headerImageContainer}>
@@ -20,6 +18,14 @@ function Profile(props) {
           <Text style={styles.userName}>{ props.user.name }</Text>
           <Text style={styles.userAge}>{ props.user.age }</Text>
         </View>
+
+        <View>
+          <Text style={styles.subDetail}>From { props.user.location }</Text>
+          <Text style={styles.subDetail}>Interested in { props.user.interested_in }</Text>
+          <Text style={styles.subDetail}>Looking for { props.user.outcome }</Text>
+        </View>
+
+        <Text style={styles.userBio}>{ props.user.bio }</Text>
       </View>
     </View>
   )
@@ -45,6 +51,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: 'row',
+    marginBottom: 10,
     justifyContent: 'space-between'
   },
   userName: {
@@ -52,8 +59,18 @@ const styles = StyleSheet.create({
     fontWeight: '700'
   },
   userAge: {
-    fontSize: 16,
+    color: '#e4555f',
+    fontSize: 32,
     fontWeight: '400',
+  },
+  subDetail: {
+    color: '#777',
+    fontSize: 12,
+    marginTop: 6
+  },
+  userBio: {
+    lineHeight: 24,
+    marginTop: 20
   }
 });
 
