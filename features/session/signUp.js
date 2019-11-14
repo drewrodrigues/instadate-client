@@ -26,7 +26,7 @@ function SignUp(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [sex, setSex] = useState(null);
-  const [interestedIn, setInterestedIn] = useState('');
+  const [interestedIn, setInterestedIn] = useState([]);
   const [lookingFor, setLookingFor] = useState([]);
   const [bio, setBio] = useState('');
   const [name, setName] = useState('');
@@ -55,6 +55,14 @@ function SignUp(props) {
       setLookingFor(lookingFor.filter(outcome => outcome !== value));
     } else {
       setLookingFor(lookingFor.concat(value));
+    }
+  }
+
+  function toggleInterestedIn(value) {
+    if (interestedIn.includes(value)) {
+      setInterestedIn(interestedIn.filter(outcome => outcome !== value));
+    } else {
+      setInterestedIn(interestedIn.concat(value));
     }
   }
 
@@ -160,15 +168,15 @@ function SignUp(props) {
           <Text style={styles.iAmLabel}>Interested in...</Text>
           <View style={styles.radioSelections}>
             <TouchableOpacity
-              style={interestedIn === 'men' ? { ...styles.checkedRadio, backgroundColor: 'blue' } : styles.radio}
-              onPress={() => setInterestedIn('men')}
+              style={interestedIn.includes('men') ? { ...styles.checkedRadio, backgroundColor: 'blue' } : styles.radio}
+              onPress={() => toggleInterestedIn('men')}
             >
               <Text style={styles.radioText}>Men</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={interestedIn === 'women' ? { ...styles.checkedRadio, backgroundColor: 'pink' } : styles.radio}
-              onPress={() => setInterestedIn('women')}
+              style={interestedIn.includes('women') ? { ...styles.checkedRadio, backgroundColor: 'pink' } : styles.radio}
+              onPress={() => toggleInterestedIn('women')}
             >
               <Text style={styles.radioText}>Women</Text>
             </TouchableOpacity>
