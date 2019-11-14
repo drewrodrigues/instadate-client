@@ -19,6 +19,7 @@ import BackButton from "../../components/backButton";
 import { signUp } from "./_actions";
 import { uploadImage } from "../imageUpload/_actions";
 import PictureVerificationTag from "../../components/pictureVerificationTag";
+import LocationSearchInput from "../../components/locationSearchInput";
 
 function SignUp(props) {
   const [errors, setErrors] = useState([]);
@@ -120,11 +121,7 @@ function SignUp(props) {
           />
 
           {/* Location */}
-          <FormTextInput
-            placeholder='Location'
-            updateCallback={setLocation}
-            value={location}
-          />
+          <LocationSearchInput placeholder='Location' callback={setLocation} value={location}/>
 
           {/* Bio */}
           <FormTextInput
