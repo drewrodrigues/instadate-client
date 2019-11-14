@@ -22,7 +22,7 @@ function Profile(props) {
         <View>
           <Text style={styles.subDetail}>From { props.user.location }</Text>
           <Text style={styles.subDetail}>Interested in { props.user.interested_in }</Text>
-          <Text style={styles.subDetail}>Looking for { props.user.outcome }</Text>
+          <Text style={styles.subDetail}>Looking for { props.user.outcomes.join(' or ') }</Text>
         </View>
 
         <Text style={styles.userBio}>{ props.user.bio }</Text>

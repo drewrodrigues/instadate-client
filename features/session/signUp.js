@@ -27,7 +27,7 @@ function SignUp(props) {
   const [password, setPassword] = useState('');
   const [sex, setSex] = useState(null);
   const [interestedIn, setInterestedIn] = useState('');
-  const [lookingFor, setLookingFor] = useState('');
+  const [lookingFor, setLookingFor] = useState([]);
   const [bio, setBio] = useState('');
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -43,11 +43,19 @@ function SignUp(props) {
       interested_in: interestedIn,
       location,
       age,
-      outcome: lookingFor,
+      outcomes: lookingFor,
       bio,
       name,
       picture_id: uploadedImage.id
     }).catch(errorMessages => setErrors(errorMessages));
+  }
+
+  function toggleLookingFor(value) {
+    if (lookingFor.includes(value)) {
+      setLookingFor(lookingFor.filter(outcome => outcome !== value));
+    } else {
+      setLookingFor(lookingFor.concat(value));
+    }
   }
 
   async function launchImageLibrary() {
@@ -170,22 +178,22 @@ function SignUp(props) {
           <Text style={styles.iAmLabel}>Looking for...</Text>
           <View style={styles.radioSelections}>
             <TouchableOpacity
-              style={lookingFor === 'dating' ? { ...styles.checkedRadio, backgroundColor: 'red' } : styles.radio}
-              onPress={() => setLookingFor('dating')}
+              style={lookingFor.includes('dating') ? { ...styles.checkedRadio, backgroundColor: 'red' } : styles.radio}
+              onPress={() => toggleLookingFor('dating')}
             >
               <Text style={styles.radioText}>Dating</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={lookingFor === 'hookups' ? { ...styles.checkedRadio, backgroundColor: 'orange' } : styles.radio}
-              onPress={() => setLookingFor('hookups')}
+              style={lookingFor.includes('hookups') ? { ...styles.checkedRadio, backgroundColor: 'orange' } : styles.radio}
+              onPress={() => toggleLookingFor('hookups')}
             >
               <Text style={styles.radioText}>Hookups</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={lookingFor === 'relationship' ? { ...styles.checkedRadio, backgroundColor: 'purple' } : styles.radio}
-              onPress={() => setLookingFor('relationship')}
+              style={lookingFor.includes('relationship') ? { ...styles.checkedRadio, backgroundColor: 'purple' } : styles.radio}
+              onPress={() => toggleLookingFor('relationship')}
             >
               <Text style={styles.radioText}>Relationship</Text>
             </TouchableOpacity>
