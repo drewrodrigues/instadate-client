@@ -1,7 +1,9 @@
 import axios from "axios";
+import getEnvVars from "../environment";
+const { apiUrl } = getEnvVars();
 
 export default axios.create({
-  baseURL: 'http://10.0.0.64:3000',
+  baseURL: apiUrl,
   headers: {
     Accept: 'application/json'
   }
