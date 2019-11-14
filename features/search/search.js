@@ -1,11 +1,8 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-function Search(props) {
-  console.log(window.store.getState());
-  console.log(props.picture);
-
+function Search() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Search Page</Text>
