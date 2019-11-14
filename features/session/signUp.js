@@ -143,6 +143,9 @@ function SignUp(props) {
           <FormTextInput
             placeholder='Bio'
             updateCallback={setBio}
+            noteText={`${200 - bio.length} characters left`}
+            extraStyles={{ height: 150 }}
+            multiline={true}
             value={bio}
           />
 
