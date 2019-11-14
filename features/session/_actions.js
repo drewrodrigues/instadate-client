@@ -14,7 +14,7 @@ export const signUp = user => dispatch => {
   return axios({
     method: 'post',
     url: '/users',
-    data: { user }
+    data: { user },
   })
   .then(res => {
     dispatch(receiveSession(res.data));

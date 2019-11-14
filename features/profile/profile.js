@@ -2,15 +2,28 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import PictureVerificationTag from "../../components/pictureVerificationTag";
+import GuyPlaceholder from '../../assets/guy-placeholder.jpg';
+import GirlPlaceholder from '../../assets/girl-placeholder.jpg';
 
 function Profile(props) {
   return (
     <View>
       <View style={styles.headerImageContainer}>
-        <Image source={{ uri: props.user.picture.url }} style={styles.picture} />
-        <View style={styles.pictureVerificationContainer}>
-          <PictureVerificationTag verified={props.user.picture.verified} />
-        </View>
+        {props.user.picture && (
+          <View>
+            <Image source={{ uri: props.user.picture.url }} style={styles.picture} />
+            <View style={styles.pictureVerificationContainer}>
+              <PictureVerificationTag verified={props.user.picture.verified} />
+            </View>
+          </View>
+        )}
+
+        {!props.user.picture && (
+          <Image
+            source={props.user.sex === 'man' ? GuyPlaceholder : GirlPlaceholder}
+            style={styles.picturePlaceholder}
+          />
+        )}
       </View>
 
       <View style={styles.detailContainer}>
@@ -39,6 +52,11 @@ const styles = StyleSheet.create({
     height: 350,
     resizeMode: 'cover',
     width: '100%'
+  },
+  picturePlaceholder: {
+    backgroundColor: '#ccc',
+    height: 350,
+    width: '100%',
   },
   pictureVerificationContainer: {
     justifyContent: 'center',
