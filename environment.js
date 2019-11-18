@@ -1,23 +1,19 @@
-import { Constants } from 'expo';
-import { Platform } from 'react-native';
-
-const localhost = Platform.OS === 'ios' ?
-  'https://localhost:3000' : 'http://10.0.0.64:3000';
+import Constants from 'expo-constants'
 
 const ENV = {
   dev: {
-    apiUrl: localhost
+    apiUrl: 'http://10.0.0.64:3000'
   },
   staging: {
-    apiUrl: 'http://instadate-api.herokuapp.com/'
+    apiUrl: 'https://instadate-api.herokuapp.com'
   },
   prod: {
-    apiUrl: 'http://instadate-api.herokuapp.com/'
+    apiUrl: 'https://instadate-api.herokuapp.com'
   }
 };
 
 const getEnvVars = (env = Constants.manifest.releaseChannel) => {
-  if (__DEV__) {
+  if (env === undefined) {
     return ENV.dev;
   } else if (env === 'staging') {
     return ENV.staging;
