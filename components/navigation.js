@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Text } from 'react-native';
 
 import SignUp from '../features/session/signUp';
 import Login from '../features/session/login';
@@ -21,7 +22,9 @@ function Navigation(props) {
 
   const Tabs = createBottomTabNavigator({
     Search: Search,
+    Requests: function (props) { return <Text>Something</Text> },
     Profile: Profile,
+    Dates: function (props) { return <Text>Dates</Text> },
     Settings: Settings
   });
 
