@@ -1,11 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Navigation from './components/navigation';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './features/session/_reducer';
 import { AsyncStorage } from 'react-native';
+import dateReducer from './features/date/_reducer';
+import searchReducer from './features/search/_reducer';
+import userReducer from './features/users/_reducer';
 
 console.disableYellowBox = true;
 
@@ -27,7 +29,12 @@ export default class App extends React.Component {
 
     this.setState({
       store: createStore(
-        combineReducers({ session: sessionReducer }),
+        combineReducers({
+          session: sessionReducer,
+          date: dateReducer,
+          search: searchReducer,
+          users: userReducer
+        }),
         preloadedState,
         applyMiddleware(thunk)
       )
