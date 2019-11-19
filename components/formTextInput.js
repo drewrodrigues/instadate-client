@@ -8,11 +8,12 @@ export default function FormTextInput({
   updateCallback,
   noteText,
   extraStyles,
-  multiline
+  multiline,
+  showLabel = true
 }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{ placeholder }</Text>
+      {showLabel && <Text style={styles.label}>{ placeholder }</Text>}
       {noteText && <Text style={styles.noteText}>{noteText}</Text>}
       <TextInput
         onChangeText={changedValue => updateCallback(changedValue)}
