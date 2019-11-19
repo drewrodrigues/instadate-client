@@ -3,7 +3,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 import SignUp from '../features/session/signUp';
 import Login from '../features/session/login';
@@ -20,13 +21,69 @@ function Navigation(props) {
     Login: { screen: Login },
   }, { headerMode: 'none' });
 
-  const Tabs = createBottomTabNavigator({
-    Search: Search,
-    Requests: function (props) { return <Text>Something</Text> },
-    Profile: Profile,
-    Dates: function (props) { return <Text>Dates</Text> },
-    Settings: Settings
-  });
+  const Tabs = createBottomTabNavigator(
+    {
+      Search: {
+        screen: Search,
+        navigationOptions: () => ({
+          title: 'Search',
+          tabBarIcon: ({ tintColor }) => (
+            <FontAwesome name='search' size={24} color={tintColor} />
+          ),
+        }),
+      },
+      Requests: {
+        screen: function () {
+          return <Text>Something</Text>
+        },
+        navigationOptions: () => ({
+          title: 'Requests',
+          tabBarIcon: ({ tintColor }) => (
+            <FontAwesome name='bell' size={24} color={tintColor} />
+          ),
+        }),
+      },
+      Dates: {
+        screen: function () {
+          return <Text>Dates</Text>
+        },
+        navigationOptions: () => ({
+          title: 'Dates',
+          tabBarIcon: ({ tintColor }) => (
+            <FontAwesome name='heart' size={24} color={tintColor} />
+          ),
+        }),
+      },
+      Profile: {
+        screen: Profile,
+        navigationOptions: () => ({
+          title: 'Profile',
+          tabBarIcon: ({ tintColor }) => (
+            <FontAwesome name='user' size={24} color={tintColor} />
+          ),
+        }),
+      },
+      Settings: {
+        screen: Settings,
+        navigationOptions: () => ({
+          title: 'Settings',
+          tabBarIcon: ({ tintColor }) => (
+            <FontAwesome name='cog' size={24} color={tintColor} />
+          ),
+        }),
+      }
+    },
+    {
+      tabBarOptions: {
+        activeTintColor: 'red',
+        activeBackgroundColor: '#222',
+        inactiveBackgroundColor: 'black',
+        labelStyle: { marginTop: 5 },
+        style: styles.bottomNav,
+        tabStyle: styles.bottomNavTab
+      },
+    }
+  );
 
   if (props.loggedIn) {
     Navigation = Tabs;
@@ -38,6 +95,19 @@ function Navigation(props) {
 
   return <Navigation />
 }
+
+const styles = StyleSheet.create({
+  bottomNav: {
+    bottom: -34,
+    height: 75,
+    marginTop: -34,
+    backgroundColor: 'red'
+  },
+  bottomNavTab: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  }
+});
 
 const mapStateToProp = state => ({
   loggedIn: state.session.session_token
