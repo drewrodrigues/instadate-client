@@ -6,5 +6,6 @@ export default axios.create({
   baseURL: apiUrl,
   headers: {
     Accept: 'application/json'
-  }
+  },
+  withCredentials: true
 });
