@@ -3,20 +3,33 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { logout } from "./_actions";
 import SignedInContainer from "../../components/signedInContainer";
+import { FontAwesome } from '@expo/vector-icons';
 
 function Settings(props) {
   return (
     <SignedInContainer body={() => (
-      <TouchableOpacity onPress={props.logout}>
-        <Text>Sign Out</Text>
+      <TouchableOpacity onPress={props.logout} style={styles.button}>
+        <Text style={styles.buttonText}>Sign Out</Text>
+        <FontAwesome name='sign-out' size={24} style={styles.icon} />
       </TouchableOpacity>
     )}/>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 200
+  button: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20
+  },
+  icon: {
+    color: '#ccc'
+  },
+  buttonText: {
+    color: 'black'
   }
 });
 
