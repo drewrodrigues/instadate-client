@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './features/session/_reducer';
 import { AsyncStorage } from 'react-native';
-import dateReducer from './features/date/_reducer';
+import dateReducer from './features/dates/_reducer';
 import searchReducer from './features/search/_reducer';
 import userReducer from './features/users/_reducer';
 

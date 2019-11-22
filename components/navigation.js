@@ -10,6 +10,7 @@ import SignUp from '../features/session/signUp';
 import Login from '../features/session/login';
 import Landing from '../features/pages/landing';
 import Search from '../features/search/search';
+import Dates from '../features/dates/dates';
 import Profile from "../features/profile/profile";
 import Settings from "../features/settings/settings";
 
@@ -45,7 +46,7 @@ function Navigation(props) {
       },
       Dates: {
         screen: function () {
-          return <Text>Dates</Text>
+          return <Dates />
         },
         navigationOptions: () => ({
           title: 'Dates',

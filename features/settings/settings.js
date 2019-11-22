@@ -2,14 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { logout } from "./_actions";
+import SignedInContainer from "../../components/signedInContainer";
 
 function Settings(props) {
   return (
-    <View style={styles.container}>
+    <SignedInContainer body={() => (
       <TouchableOpacity onPress={props.logout}>
         <Text>Sign Out</Text>
       </TouchableOpacity>
-    </View>
+    )}/>
   )
 }
 
