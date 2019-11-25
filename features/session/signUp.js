@@ -171,15 +171,15 @@ function SignUp(props) {
           <Text style={styles.iAmLabel}>Interested in...</Text>
           <View style={styles.radioSelections}>
             <TouchableOpacity
-              style={interestedIn.includes('men') ? { ...styles.checkedRadio, backgroundColor: 'blue' } : styles.radio}
-              onPress={() => toggleInterestedIn('men')}
+              style={interestedIn.includes('man') ? { ...styles.checkedRadio, backgroundColor: 'blue' } : styles.radio}
+              onPress={() => toggleInterestedIn('man')}
             >
               <Text style={styles.radioText}>Men</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={interestedIn.includes('women') ? { ...styles.checkedRadio, backgroundColor: 'pink' } : styles.radio}
-              onPress={() => toggleInterestedIn('women')}
+              style={interestedIn.includes('woman') ? { ...styles.checkedRadio, backgroundColor: 'pink' } : styles.radio}
+              onPress={() => toggleInterestedIn('woman')}
             >
               <Text style={styles.radioText}>Women</Text>
             </TouchableOpacity>
