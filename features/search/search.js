@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { search } from "./_action";
 import Result from './_result';
 import SignedInContainer from "../../components/signedInContainer";
+import SearchPlaceholder from '../../assets/search.png';
+import Placeholder from "../../components/placeholder";
 
 class Search extends React.Component {
   constructor(props) {
@@ -22,12 +24,22 @@ class Search extends React.Component {
     return (
       <SignedInContainer loading={this.state.loading} body={() => (
         <View>
-          <Text style={styles.text}>{this.props.results.length} results</Text>
-          <ScrollView style={styles.results}>
-            {this.props.results.map(result => (
-              <Result {...result} />
-            ))}
-          </ScrollView>
+          {this.props.results.length !== 0 && (
+            <ScrollView style={styles.results}>
+              <Text style={styles.text}>{this.props.results.length} dates</Text>
+              {this.props.results.map(result => (
+                <Result {...result} />
+              ))}
+            </ScrollView>
+          )}
+
+          {this.props.results.length === 0 && (
+            <Placeholder
+              icon={SearchPlaceholder}
+              headerText="No dates found"
+              subText="Try changing your search filters or add your own date"
+            />
+          )}
         </View>
       )}/>
     )
@@ -39,9 +51,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 32,
     textAlign: 'center'
-  },
-  results: {
-    paddingTop: 10,
   }
 });
 
