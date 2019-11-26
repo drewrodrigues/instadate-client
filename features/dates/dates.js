@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import SignedInContainer from "../../components/signedInContainer";
 import DateForm from "./dateForm";
 import { getDate } from "./_action";
+import Heart from '../../assets/love.png';
+import Placeholder from "../../components/placeholder";
 
 class Dates extends React.Component {
   constructor(props) {
@@ -25,15 +27,30 @@ class Dates extends React.Component {
   }
 
   render() {
-    const button = <TouchableOpacity style={styles.requestDateButton} onPress={() => this.setState({ showForm: true })}>
+    const Button = <TouchableOpacity style={styles.requestDateButton} onPress={() => this.setState({ showForm: true })}>
       <Text style={styles.requestDateButtonText}>{ this.props.date ? 'Edit Date' : 'New Date' }</Text>
     </TouchableOpacity>;
 
     return (
-      <SignedInContainer loading={this.state.loading} button={button} body={() => (
+      <SignedInContainer loading={this.state.loading} button={Button} body={() => (
         <View>
-          <Text>Something</Text>
           {this.state.showForm && <DateForm close={this.hideForm} />}
+
+          {this.props.date && <View style={styles.date}>
+            <Text style={styles.dateText}>
+              { this.props.date.activity }
+              { ' @' } { this.props.date.time || 'any time' }
+              { ' in' } { this.props.date.location }
+            </Text>
+          </View>}
+
+          {!this.props.date && (
+            <Placeholder
+              icon={Heart}
+              headerText="You don't have a date, yet"
+              subText="Add a new date or try sending a request"
+            />
+          )}
         </View>
       )}/>
     )
@@ -88,6 +105,14 @@ const styles = StyleSheet.create({
   requestButtonText: {
     color: 'white',
     fontSize: 12
+  },
+  date: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+  dateText: {
+    color: '#222',
+    margin: 20
   }
 });
 
