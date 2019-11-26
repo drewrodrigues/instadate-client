@@ -13,6 +13,7 @@ import Search from '../features/search/search';
 import Dates from '../features/dates/dates';
 import Profile from "../features/profile/profile";
 import Settings from "../features/settings/settings";
+import Requests from "../features/requests/requests";
 
 function Navigation(props) {
   let Navigation = null;
@@ -35,7 +36,7 @@ function Navigation(props) {
       },
       Requests: {
         screen: function () {
-          return <Text>Something</Text>
+          return <Requests />
         },
         navigationOptions: () => ({
           title: 'Requests',
