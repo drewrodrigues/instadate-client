@@ -11,7 +11,7 @@ export const receiveSearch = search => ({
 export const search = () => dispatch => {
   return axios({
     method: 'get',
-    url: '/instadates'
+    url: '/search'
   })
   .then(res => {
     dispatch(receiveSearch(res.data.dates));

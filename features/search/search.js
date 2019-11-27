@@ -6,6 +6,7 @@ import Result from './_result';
 import SignedInContainer from "../../components/signedInContainer";
 import SearchPlaceholder from '../../assets/search.png';
 import Placeholder from "../../components/placeholder";
+import { NavigationEvents } from 'react-navigation';
 
 class Search extends React.Component {
   constructor(props) {
@@ -14,16 +15,24 @@ class Search extends React.Component {
       showForm: false,
       loading: true
     };
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
-    this.props.search().then(() => this.setState({ loading: false }));
+    this.search();
+  }
+
+  search() {
+    this.setState({ loading: true }, () => {
+      this.props.search().then(() => this.setState({ loading: false }));
+    });
   }
 
   render() {
     return (
       <SignedInContainer loading={this.state.loading} body={() => (
         <View>
+          <NavigationEvents onWillFocus={this.search}/>
           {this.props.results.length !== 0 && (
             <ScrollView style={styles.results}>
               <Text style={styles.text}>{this.props.results.length} dates</Text>
