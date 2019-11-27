@@ -5,10 +5,11 @@ export default function FormButton({
   color = 'red',
   fontWeight = '400',
   handleSubmit,
-  text
+  text,
+  customStyles = {}
 }) {
   return (
-    <TouchableOpacity onPress={handleSubmit} style={{ ...styles.button, backgroundColor: color }}>
+    <TouchableOpacity onPress={handleSubmit} style={{ ...styles.button, ...customStyles, backgroundColor: color }}>
       <Text style={{ ...styles.text, fontWeight }}>{text}</Text>
     </TouchableOpacity>
   )
