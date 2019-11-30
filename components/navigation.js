@@ -14,6 +14,7 @@ import Dates from '../features/dates/dates';
 import Profile from "../features/profile/profile";
 import Settings from "../features/settings/settings";
 import Requests from "../features/requests/requests";
+import LocationPermission from "../features/permissions/locationPermission";
 
 function Navigation(props) {
   let Navigation = null;
@@ -88,6 +89,9 @@ function Navigation(props) {
   );
 
   if (props.loggedIn) {
+    if (!props.locationPermissionAccepted) {
+      return <LocationPermission />;
+    }
     Navigation = Tabs;
   } else {
     Navigation = Stack;
@@ -112,7 +116,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProp = state => ({
-  loggedIn: state.session.session_token
+  loggedIn: state.session.session_token,
+  locationPermissionAccepted: state.permissions.location === 'accepted'
 });
 
 export default connect(mapStateToProp)(Navigation);
