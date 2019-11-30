@@ -1,5 +1,5 @@
 import axios from '../../config/axios';
-import * as Location from 'expo-location';
+import { getCoordinates } from "../permissions/_actions";
 
 export const RECEIVE_DATES = 'RECEIVE_DATES';
 
@@ -11,8 +11,7 @@ const receiveDate = dates => ({
 export const createDate = instadate => async (dispatch) => {
   dispatch({ type: 'CREATE_DATE_START '});
 
-  const position = await Location.getCurrentPositionAsync();
-  const { latitude, longitude } = position.coords;
+  const { latitude, longitude } = await getCoordinates();
 
   return axios({
     method: 'post',
