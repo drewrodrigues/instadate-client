@@ -2,6 +2,7 @@ import {
   LOCATION_PERMISSION_ACCEPTED,
   LOCATION_PERMISSION_REJECTED
 } from "./_actions";
+import { CLEAR_SESSION } from "../settings/_actions";
 
 /*
 - waiting
@@ -20,6 +21,8 @@ export default function(oldState = defaultState, action) {
       return { ...oldState, location: 'accepted' };
     case LOCATION_PERMISSION_REJECTED:
       return { ...oldState, location: 'rejected' };
+    case CLEAR_SESSION:
+      return defaultState;
     default:
       return oldState;
   }
