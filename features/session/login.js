@@ -15,7 +15,7 @@ function Login(props) {
 
   function handleLogin() {
     props.login({ email, password })
-    .catch(_ => Alert.alert('Failed to login'));
+      .catch(_ => Alert.alert('Failed to login'));
   }
 
   return (

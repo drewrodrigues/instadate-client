@@ -37,10 +37,11 @@ export const login = session => dispatch => {
     data: session
   })
   .then(res => {
-    dispatch(receiveSession(res.data));
     dispatch({ type: 'LOGIN_SUCCESS' });
-    _storeSession(res.data);
-    return Promise.resolve(res.data);
+    _storeSession(res.data).then(() => {
+      dispatch(receiveSession(res.data));
+      return Promise.resolve(res.data);
+    });
   })
   .catch(err => {
     dispatch({ type: 'LOGIN_FAIL' });
