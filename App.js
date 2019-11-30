@@ -8,6 +8,7 @@ import { AsyncStorage } from 'react-native';
 import dateReducer from './features/dates/_reducer';
 import searchReducer from './features/search/_reducer';
 import userReducer from './features/users/_reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 console.disableYellowBox = true;
 
@@ -36,7 +37,7 @@ export default class App extends React.Component {
           users: userReducer
         }),
         preloadedState,
-        applyMiddleware(thunk)
+        composeWithDevTools(applyMiddleware(thunk))
       )
     });
   }
