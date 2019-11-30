@@ -24,9 +24,13 @@ export default function SignedInContainer(props) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#e9ebee',
+    flex: 1,
     height: '100%',
     padding: 20,
     paddingTop: 50
+  },
+  body: {
+    flex: 1
   },
   header: {
     alignItems: 'center',

@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   bottomNav: {
     bottom: -34,
     height: 75,
-    marginTop: -34,
+    marginTop: -35,
     backgroundColor: 'red'
   },
   bottomNavTab: {
