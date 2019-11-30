@@ -14,14 +14,15 @@ class Search extends React.Component {
     super(props);
     this.state = {
       showForm: false,
-      loading: true
+      loading: true,
+      distance: 5
     };
     this.search = this.search.bind(this);
   }
 
   search() {
     this.setState({ loading: true }, async () => {
-      await this.props.search();
+      await this.props.search(this.state.distance);
       this.setState({ loading: false });
     });
   }
@@ -69,7 +70,7 @@ class Search extends React.Component {
 
           <View style={styles.textContainer}>
             <Text style={styles.text}> within</Text>
-            <Text style={styles.textWeighted}> 5 miles</Text>
+            <Text style={styles.textWeighted}> {this.state.distance} miles</Text>
             <FontAwesome5 name='map-marker-alt' size={16} style={styles.iconRight} />
           </View>
         </View>
@@ -129,7 +130,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  search: () => dispatch(search()),
+  search: distance => dispatch(search(distance)),
   clearSearch: () => dispatch(clearSearch)
 });
 

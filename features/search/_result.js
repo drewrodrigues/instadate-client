@@ -13,20 +13,26 @@ function Date(props) {
       </View>
 
       <View style={styles.detailContainer}>
-        <Text style={styles.userName}>{ props.user.name }</Text>
+        <View style={styles.leftDetailContainer}>
+          <Text style={styles.userName}>{ props.user.name }</Text>
 
-        <View style={styles.textContainer}>
-          <FontAwesome5 name='map-marker-alt' size={12} style={styles.locationIcon} />
-          <Text style={styles.locationText}>{ props.city }</Text>
+          <View style={styles.textContainer}>
+            <FontAwesome5 name='map-marker-alt' size={12} style={styles.locationIcon} />
+            <Text style={styles.locationText}>{ props.city }</Text>
+          </View>
         </View>
 
-        <TouchableOpacity style={styles.requestButton}>
-          <Text style={styles.requestButtonText}>
-            <FontAwesome5 name='heart' size={24} style={styles.icon} />
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.rightDetailContainer}>
+          <TouchableOpacity style={styles.requestButton}>
+            <Text style={styles.requestButtonText}>
+              <FontAwesome5 name='heart' size={24} style={styles.icon} />
+            </Text>
+          </TouchableOpacity>
 
+          <Text style={styles.distance}>{props.distance} miles away</Text>
+        </View>
+
+      </View>
     </View>
   )
 }
@@ -73,17 +79,21 @@ const styles = StyleSheet.create({
     paddingLeft: 55,
     marginLeft: 60,
     flex: 1,
+    flexDirection: 'row'
   },
-  detailText: {
+  leftDetailContainer: {
+    flex: 2
+  },
+  rightDetailContainer: {
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  distance: {
+    color: '#ccc',
+    fontSize: 12
   },
   requestButton: {
-    position: 'absolute',
-    borderRadius: 10,
-    padding: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    top: 27,
-    right: 15
   },
   requestButtonText: {
     color: '#e9ebee'
