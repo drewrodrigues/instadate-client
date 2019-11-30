@@ -18,19 +18,20 @@ class Search extends React.Component {
     this.search = this.search.bind(this);
   }
 
-  componentDidMount() {
-    this.search();
-  }
-
   search() {
-    this.setState({ loading: true }, () => {
-      this.props.search().then(() => this.setState({ loading: false }));
+    this.setState({ loading: true }, async () => {
+      await this.props.search();
+      this.setState({ loading: false });
     });
   }
 
   render() {
     return (
-      <SignedInContainer loading={this.state.loading} body={() => (
+      <SignedInContainer
+        loading={this.state.loading}
+        queryOnFocus={this.search}
+        body={() => (
+
         <View>
           <NavigationEvents onWillFocus={this.search}/>
           {this.props.results.length !== 0 && (

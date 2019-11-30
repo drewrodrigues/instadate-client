@@ -1,11 +1,14 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import Logo from "../assets/logo.png";
+import { NavigationEvents } from 'react-navigation';
 
 export default function SignedInContainer(props) {
-  console.log(props.body);
+  const query = props.queryOnFocus || function() {};
   return (
     <View style={styles.container}>
+      <NavigationEvents onWillFocus={query} />
+
       <View style={styles.header}>
         <Image source={Logo} style={styles.logo} />
         {props.button}

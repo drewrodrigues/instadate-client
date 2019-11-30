@@ -15,11 +15,14 @@ class Dates extends React.Component {
       loading: true
     };
     this.hideForm = this.hideForm.bind(this);
+    this.getDates = this.getDates.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getDate(this.props.user_id)
-      .then(() => this.setState({ loading: false }));
+  getDates() {
+    this.setState({ loading: true }, async () => {
+      await this.props.getDate(this.props.user_id);
+      this.setState({ loading: false });
+    });
   }
 
   hideForm() {
@@ -32,7 +35,12 @@ class Dates extends React.Component {
     </TouchableOpacity>;
 
     return (
-      <SignedInContainer loading={this.state.loading} button={Button} body={() => (
+      <SignedInContainer
+        queryOnFocus={this.getDates}
+        loading={this.state.loading}
+        button={Button}
+        body={() => (
+
         <View>
           {this.state.showForm && <DateForm close={this.hideForm} />}
 
@@ -52,7 +60,7 @@ class Dates extends React.Component {
             />
           )}
         </View>
-      )}/>
+      )} />
     )
   }
 }
