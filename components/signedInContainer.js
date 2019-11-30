@@ -1,16 +1,15 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import Logo from "../assets/logo.png";
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 
 export default function SignedInContainer(props) {
   const query = props.queryOnFocus || function() {};
+
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, ...props.customStyles }}>
       <NavigationEvents onWillFocus={query} />
 
       <View style={styles.header}>
-        <Image source={Logo} style={styles.logo} />
         {props.button}
       </View>
 
@@ -26,7 +25,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#e9ebee',
     height: '100%',
-    padding: 20
+    padding: 20,
+    paddingTop: 50
   },
   header: {
     alignItems: 'center',
