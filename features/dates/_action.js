@@ -1,4 +1,5 @@
 import axios from '../../config/axios';
+import * as Location from 'expo-location';
 
 export const RECEIVE_DATES = 'RECEIVE_DATES';
 
@@ -7,13 +8,15 @@ const receiveDate = dates => ({
   dates
 });
 
-export const createDate = instadate => dispatch => {
+export const createDate = instadate => async (dispatch) => {
   dispatch({ type: 'CREATE_DATE_START '});
+
+  const location = await Location.getCurrentPositionAsync();
 
   return axios({
     method: 'post',
     url: '/instadates',
-    data: { instadate }
+    data: { instadate: { ...instadate, location } }
   })
   .then(res => {
     dispatch({ TYPE: 'CREATE_DATE_SUCCESS' });
