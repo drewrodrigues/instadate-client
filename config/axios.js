@@ -22,5 +22,5 @@ export default async (params) => {
 // pull cookie from Async storage
 const _getToken = async () => {
   const session = await AsyncStorage.getItem('@session');
-  return JSON.parse(session).session_token;
+  return (session ? JSON.parse(session).session_token : '');
 };
