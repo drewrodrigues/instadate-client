@@ -9,7 +9,7 @@ function Date(props) {
       { props.user.picture && <Image source={props.user.picture} style={styles.image}/> }
 
       <View style={styles.detailContainer}>
-        <Text style={styles.detailText}>{ props.activity } in { props.location }</Text>
+        <Text style={styles.detailText}>{ props.activity } in { props.city }</Text>
         <Text>with { props.user.name }</Text>
 
         <TouchableOpacity style={styles.requestButton}>
