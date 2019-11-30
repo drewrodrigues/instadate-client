@@ -8,7 +8,9 @@ import SignedInContainer from "../../components/signedInContainer";
 
 function Profile(props) {
   return (
-    <SignedInContainer body={() => (
+    <SignedInContainer
+      customStyles={{ padding: 0, paddingTop: 0 }}
+      body={() => (
       <View>
         <View style={styles.headerImageContainer}>
           {props.user.picture && (
@@ -52,22 +54,30 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   picture: {
-    height: 350,
+    height: 600,
     resizeMode: 'cover',
     width: '100%'
   },
   picturePlaceholder: {
     backgroundColor: '#ccc',
-    height: 350,
+    height: 600,
     width: '100%',
   },
   pictureVerificationContainer: {
     justifyContent: 'center',
     position: 'absolute',
-    bottom: -10,
-    right: 40
+    top: 50,
+    right: 20
   },
   detailContainer: {
+    backgroundColor: 'white',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 320,
+    marginTop: -120,
+    marginLeft: 20,
+    marginRight: 20,
     padding: 40
   },
   headerContainer: {
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
   userBio: {
     lineHeight: 24,
     marginTop: 20
-  }
+  },
 });
 
 const mapStateToProps = state => ({
