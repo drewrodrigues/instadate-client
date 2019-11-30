@@ -24,7 +24,7 @@ export default function SignedInContainer(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: '#e9ebee',
     height: '100%',
     padding: 20
   },

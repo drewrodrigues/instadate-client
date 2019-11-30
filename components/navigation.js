@@ -78,9 +78,10 @@ function Navigation(props) {
     },
     {
       tabBarOptions: {
-        activeTintColor: 'red',
-        activeBackgroundColor: '#222',
-        inactiveBackgroundColor: 'black',
+        activeTintColor: 'white',
+        activeBackgroundColor: 'red',
+        inactiveBackgroundColor: 'white',
+        inactiveTintColor: '#e9ebee',
         labelStyle: { marginTop: 5 },
         style: styles.bottomNav,
         tabStyle: styles.bottomNavTab
