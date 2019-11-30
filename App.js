@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import sessionReducer from './features/session/_reducer';
 import { AsyncStorage } from 'react-native';
 import dateReducer from './features/dates/_reducer';
+import permissionsReducer from './features/permissions/_reducer';
 import searchReducer from './features/search/_reducer';
 import userReducer from './features/users/_reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -33,6 +34,7 @@ export default class App extends React.Component {
         combineReducers({
           session: sessionReducer,
           date: dateReducer,
+          permissions: permissionsReducer,
           search: searchReducer,
           users: userReducer
         }),
