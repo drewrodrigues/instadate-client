@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './features/session/_reducer';
 import { AsyncStorage } from 'react-native';
-import dateReducer from './features/dates/_reducer';
+import datesReducer from './features/dates/_reducer';
 import permissionsReducer from './features/permissions/_reducer';
 import searchReducer from './features/search/_reducer';
 import userReducer from './features/users/_reducer';
@@ -33,7 +33,7 @@ export default class App extends React.Component {
       store: createStore(
         combineReducers({
           session: sessionReducer,
-          date: dateReducer,
+          dates: datesReducer,
           permissions: permissionsReducer,
           search: searchReducer,
           users: userReducer
