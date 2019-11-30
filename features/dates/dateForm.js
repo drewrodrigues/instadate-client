@@ -8,13 +8,11 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 function DateForm(props) {
   const [activity, setActivity] = useState('');
-  const [location, setLocation] = useState('');
   const [time, setTime] = useState('');
 
   function handleSubmit() {
     props.createDate({
       activity,
-      location,
       time
     })
   }

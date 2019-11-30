@@ -31,7 +31,7 @@ class Dates extends React.Component {
 
   render() {
     const Button = <TouchableOpacity style={styles.requestDateButton} onPress={() => this.setState({ showForm: true })}>
-      <Text style={styles.requestDateButtonText}>{ this.props.date ? 'Edit Date' : 'New Date' }</Text>
+      <Text style={styles.requestDateButtonText}>{ this.props.dates.length > 0 ? 'Edit Date' : 'New Date' }</Text>
     </TouchableOpacity>;
 
     return (
@@ -44,15 +44,17 @@ class Dates extends React.Component {
         <View>
           {this.state.showForm && <DateForm close={this.hideForm} />}
 
-          {this.props.date && <View style={styles.date}>
-            <Text style={styles.dateText}>
-              { this.props.date.activity }
-              { ' @' } { this.props.date.time || 'any time' }
-              { ' in' } { this.props.date.location }
-            </Text>
+          {this.props.dates.length > 0 && <View style={styles.date}>
+            {this.props.dates.map(date => (<View>
+              <Text style={styles.dateText}>
+                { date.activity }
+                { ' @' } { date.time || 'any time' }
+                { ' in' } { date.latitude } | { date.longitude }
+              </Text>
+            </View>))}
           </View>}
 
-          {!this.props.date && (
+          {this.props.dates.length === 0 && (
             <Placeholder
               icon={Heart}
               headerText="You don't have a date, yet"
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.users.find(user => user.id == ownProps.creator_id),
-  date: state.date,
+  dates: state.dates,
   user_id: state.session.id
 });
 

@@ -11,12 +11,13 @@ const receiveDate = dates => ({
 export const createDate = instadate => async (dispatch) => {
   dispatch({ type: 'CREATE_DATE_START '});
 
-  const location = await Location.getCurrentPositionAsync();
+  const position = await Location.getCurrentPositionAsync();
+  const { latitude, longitude } = position.coords;
 
   return axios({
     method: 'post',
     url: '/instadates',
-    data: { instadate: { ...instadate, location } }
+    data: { instadate: { ...instadate, latitude, longitude } }
   })
   .then(res => {
     dispatch({ TYPE: 'CREATE_DATE_SUCCESS' });
