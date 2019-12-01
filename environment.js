@@ -2,7 +2,7 @@ import Constants from 'expo-constants'
 
 const ENV = {
   dev: {
-    apiUrl: 'http://10.0.0.64:3000'
+    apiUrl: 'http://172.20.10.2:3000'
   },
   staging: {
     apiUrl: 'https://instadate-api.herokuapp.com'

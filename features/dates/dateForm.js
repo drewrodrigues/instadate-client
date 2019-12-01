@@ -5,6 +5,8 @@ import FormTextInput from "../../components/formTextInput";
 import FormButton from "../../components/formButton";
 import { createDate } from "./_action";
 import { FontAwesome5 } from '@expo/vector-icons';
+import RadioButton from "../../components/radioButton";
+import ToggleableStyle from "../../components/toggleableStyle";
 
 function DateForm(props) {
   const [activity, setActivity] = useState('');
@@ -21,51 +23,36 @@ function DateForm(props) {
     <Modal>
       <View style={styles.container}>
         <View style={styles.activities}>
-          <TouchableOpacity onPress={() => setActivity('anything')} style={{ ...styles.activityButton, backgroundColor: activity === 'anything' ? 'red' : '#222' }}>
-            <FontAwesome5 name='question' size={32} style={{ ...styles.icon, color: activity === 'anything' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'anything' ? 'white' : 'black' }}>Anything</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('coffee')} style={{ ...styles.activityButton, backgroundColor: activity === 'coffee' ? 'red' : '#222' }}>
-            <FontAwesome5 name='coffee' size={32} style={{ ...styles.icon, color: activity === 'coffee' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'coffee' ? 'white' : 'black' }}>Coffee</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('drinks')} style={{ ...styles.activityButton, backgroundColor: activity === 'drinks' ? 'red' : '#222' }}>
-            <FontAwesome5 name='cocktail' size={32} style={{ ...styles.icon, color: activity === 'drinks' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'drinks' ? 'white' : 'black' }}>Drinks</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('food')} style={{ ...styles.activityButton, backgroundColor: activity === 'food' ? 'red' : '#222' }}>
-            <FontAwesome5 name='utensils' size={32} style={{ ...styles.icon, color: activity === 'food' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'food' ? 'white' : 'black' }}>Food</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('hike')} style={{ ...styles.activityButton, backgroundColor: activity === 'hike' ? 'red' : '#222' }}>
-            <FontAwesome5 name='hiking' size={32} style={{ ...styles.icon, color: activity === 'hike' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'hike' ? 'white' : 'black' }}>Hike</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('movie')} style={{ ...styles.activityButton, backgroundColor: activity === 'movie' ? 'red' : '#222' }}>
-            <FontAwesome5 name='film' size={32} style={{ ...styles.icon, color: activity === 'movie' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'movie' ? 'white' : 'black' }}>Movie</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('roller skating')} style={{ ...styles.activityButton, backgroundColor: activity === 'roller skating' ? 'red' : '#222' }}>
-            <FontAwesome5 name='skating' size={32} style={{ ...styles.icon, color: activity === 'roller skating' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'roller skating' ? 'white' : 'black' }}>Skating</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('tea')} style={{ ...styles.activityButton, backgroundColor: activity === 'tea' ? 'red' : '#222' }}>
-            <FontAwesome5 name='mug-hot' size={32} style={{ ...styles.icon, color: activity === 'tea' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'tea' ? 'white' : 'black' }}>Tea</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setActivity('walk')} style={{ ...styles.activityButton, backgroundColor: activity === 'walk' ? 'red' : '#222' }}>
-            <FontAwesome5 name='walking' size={32} style={{ ...styles.icon, color: activity === 'walk' ? 'white' : 'black' }} />
-            <Text style={{ ...styles.activityButtonText, color: activity === 'walk' ? 'white' : 'black' }}>Walk</Text>
-          </TouchableOpacity>
-
+          {[
+            { name: 'anything', icon: 'question' },
+            { name: 'coffee', icon: 'coffee' },
+            { name: 'drinks', icon: 'cocktail' },
+            { name: 'food', icon: 'utensils' },
+            { name: 'hike', icon: 'hiking' },
+            { name: 'movie', icon: 'film' },
+            { name: 'skating', icon: 'skating' },
+            { name: 'tea', icon: 'mug-hot' },
+            { name: 'walk', icon: 'walking' }
+          ].map(activityOption => (
+            <RadioButton
+              activeStyle={styles.activityButtonSelected}
+              inactiveStyle={styles.activityButton}
+              key={activityOption.name}
+              selectedValue={activity}
+              value={activityOption.name}
+              updateCallback={setActivity}
+           >
+              <ToggleableStyle
+                activeStyle={{ color: 'white' }}
+                inactiveStyle={{ color: 'black' }}
+                selectedValue={activityOption.name}
+                value={activity}
+              >
+                <FontAwesome5 name={activityOption.icon} size={32} style={{ color: 'white' }}/>
+                <Text style={{ color: 'white' }}>{activityOption.name}</Text>
+              </ToggleableStyle>
+            </RadioButton>
+          ))}
         </View>
 
         <Text style={styles.label}>3. Select a time... (optional)</Text>
@@ -128,7 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 100,
+    height: '33.3333%',
     width: '33.3333%'
   },
   icon: {
