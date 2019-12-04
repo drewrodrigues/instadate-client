@@ -13,7 +13,7 @@ import Search from '../features/search/search';
 import Dates from '../features/dates/dates';
 import Profile from '../features/profile/profile';
 import Settings from '../features/settings/settings';
-import Requests from '../features/requests/requests';
+import Sparks from '../features/sparks/sparks';
 import LocationPermission from '../features/permissions/locationPermission';
 
 function Navigation(props) {
@@ -34,9 +34,9 @@ function Navigation(props) {
           ),
         }),
       },
-      Requests: {
+      Sparks: {
         screen: function() {
-          return <Requests />;
+          return <Sparks />;
         },
         navigationOptions: () => ({
           tabBarIcon: ({tintColor}) => (
