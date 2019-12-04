@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 import SignUp from '../features/session/signUp';
@@ -50,7 +50,7 @@ function Navigation(props) {
         },
         navigationOptions: () => ({
           tabBarIcon: ({ tintColor }) => (
-            <FontAwesome name='heart' size={24} color={tintColor} />
+            <FontAwesome name='bolt' size={42} color={tintColor} />
           ),
         }),
       },
