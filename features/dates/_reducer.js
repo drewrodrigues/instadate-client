@@ -1,4 +1,4 @@
-import { RECEIVE_DATES } from "./_action";
+import { RECEIVE_DATE, RECEIVE_DATES } from "./_action";
 
 export default function(oldState = [], action) {
   Object.freeze(oldState);
@@ -6,6 +6,8 @@ export default function(oldState = [], action) {
   switch (action.type) {
     case RECEIVE_DATES:
       return action.dates;
+    case RECEIVE_DATE:
+      return oldState.map(date => date.id === action.date.id ? action.date : date);
     default:
       return oldState;
   }

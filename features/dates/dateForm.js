@@ -3,20 +3,24 @@ import { connect } from 'react-redux';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FormTextInput from "../../components/formTextInput";
 import FormButton from "../../components/formButton";
-import { createDate } from "./_action";
+import { createOrUpdateDate } from "./_action";
 import { FontAwesome5 } from '@expo/vector-icons';
 import RadioButton from "../../components/radioButton";
 import ToggleableStyle from "../../components/toggleableStyle";
 
-function DateForm(props) {
-  const [activity, setActivity] = useState('');
-  const [time, setTime] = useState('');
+function DateForm({
+  close,
+  createOrUpdateDate,
+  date,
+}) {
+  const [activity, setActivity] = useState(date ? date.activity : '');
+  const [time, setTime] = useState(date ? date.time : '');
 
   function handleSubmit() {
-    props.createDate({
-      activity,
-      time
-    })
+    const params = { activity, time };
+    const action = date ? 'UPDATE' : 'CREATE';
+    createOrUpdateDate(params, action)
+      .then(close);
   }
 
   return (
@@ -59,10 +63,10 @@ function DateForm(props) {
         <FormTextInput showLabel={false} placeholder='Time' value={time} updateCallback={setTime}/>
 
         <View style={styles.buttons}>
-          <TouchableOpacity onPress={() => props.close()} style={styles.closeButton}>
+          <TouchableOpacity onPress={() => close()} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>Cancel</Text>
           </TouchableOpacity>
-          <FormButton text='Add Date' handleSubmit={handleSubmit} customStyles={{ width: '50%' }}/>
+          <FormButton text={date ? 'Update Date' : 'Add Date'} handleSubmit={handleSubmit} customStyles={{ width: '50%' }}/>
         </View>
       </View>
     </Modal>
@@ -128,8 +132,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapDispatchToProps = dispatch => ({
-  createDate: date => dispatch(createDate(date))
+const mapStateToProps = state => ({
+  date: state.dates.find(date => date.creator_id == state.session.id)
 });
 
-export default connect(null, mapDispatchToProps)(DateForm);
+const mapDispatchToProps = dispatch => ({
+  createOrUpdateDate: (date, action) => dispatch(createOrUpdateDate(date, action))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DateForm);

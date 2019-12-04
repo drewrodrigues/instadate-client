@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import SignedInContainer from "../../components/signedInContainer";
 import DateForm from "./dateForm";
-import { getDate } from "./_action";
+import { getDates } from "./_action";
 import Heart from '../../assets/love.png';
 import Placeholder from "../../components/placeholder";
 
@@ -20,7 +20,7 @@ class Dates extends React.Component {
 
   getDates() {
     this.setState({ loading: true }, async () => {
-      await this.props.getDate(this.props.user_id);
+      await this.props.getDate();
       this.setState({ loading: false });
     });
   }
@@ -49,7 +49,7 @@ class Dates extends React.Component {
               <Text style={styles.dateText}>
                 { date.activity }
                 { ' @' } { date.time || 'any time' }
-                { ' in' } { date.latitude } | { date.longitude }
+                { ' in' } { date.city }
               </Text>
             </View>))}
           </View>}
@@ -91,9 +91,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
-  detailText: {
-
-  },
   requestDateButton: {
     backgroundColor: 'red',
     borderRadius: 10,
@@ -126,14 +123,13 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state, ownProps) => ({
-  user: state.users.find(user => user.id == ownProps.creator_id),
+const mapStateToProps = state => ({
   dates: state.dates,
   user_id: state.session.id
 });
 
 const mapDispatchToProps = dispatch => ({
-  getDate: user_id => dispatch(getDate(user_id)),
+  getDate: () => dispatch(getDates()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dates);

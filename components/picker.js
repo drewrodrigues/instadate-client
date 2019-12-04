@@ -4,7 +4,6 @@ import { Alert, Picker, StyleSheet, Text, TouchableOpacity, View } from 'react-n
 export default function PickerWithButton({ close, updateCallback, value }) {
 
   function checkForPremiumAndUpdate(value) {
-    console.log(value);
     if (value > 15) {
       Alert.alert('Premium Required', 'Please subscribe to search above 10 miles');
     } else {
