@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import SignedInContainer from "../../components/signedInContainer";
 import DateForm from "./dateForm";
 import { getDates } from "./_action";
 import Heart from '../../assets/love.png';
 import Placeholder from "../../components/placeholder";
+import { NavigationEvents } from "react-navigation";
+import Loading from "../../components/loading";
 
 class Dates extends React.Component {
   constructor(props) {
@@ -30,48 +31,46 @@ class Dates extends React.Component {
   }
 
   render() {
+    if (this.state.loading) return <View>
+      <NavigationEvents onWillFocus={this.getDates} />
+      <Loading />
+    </View>;
+
     const Button = <TouchableOpacity style={styles.requestDateButton} onPress={() => this.setState({ showForm: true })}>
       <Text style={styles.requestDateButtonText}>{ this.props.dates.length > 0 ? 'Edit Date' : 'New Date' }</Text>
     </TouchableOpacity>;
 
     return (
-      <SignedInContainer
-        queryOnFocus={this.getDates}
-        loading={this.state.loading}
-        button={Button}
-        body={() => (
+      <View style={styles.container}>
+        <NavigationEvents onWillFocus={this.getDates} />
+        {Button}
+        {this.state.showForm && <DateForm close={this.hideForm} />}
 
-        <View>
-          {this.state.showForm && <DateForm close={this.hideForm} />}
+        {this.props.dates.length > 0 && <View style={styles.date}>
+          {this.props.dates.map(date => (<View>
+            <Text style={styles.dateText} key={date.id}>
+              { date.activity }
+              { ' @' } { date.time || 'any time' }
+              { ' in' } { date.city }
+            </Text>
+          </View>))}
+        </View>}
 
-          {this.props.dates.length > 0 && <View style={styles.date}>
-            {this.props.dates.map(date => (<View>
-              <Text style={styles.dateText}>
-                { date.activity }
-                { ' @' } { date.time || 'any time' }
-                { ' in' } { date.city }
-              </Text>
-            </View>))}
-          </View>}
-
-          {this.props.dates.length === 0 && (
-            <Placeholder
-              icon={Heart}
-              headerText="You don't have a date, yet"
-              subText="Add a new date or try sending a request"
-            />
-          )}
-        </View>
-      )} />
+        {this.props.dates.length === 0 && (
+          <Placeholder
+            icon={Heart}
+            headerText="You don't have a date, yet"
+            subText="Add a new date or try sending a request"
+          />
+        )}
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 10,
-    flexDirection: 'row',
-    marginBottom: 35,
+    paddingTop: 50
   },
   image: {
     borderRadius: 50,

@@ -4,48 +4,43 @@ import { connect } from 'react-redux';
 import PictureVerificationTag from "../../components/pictureVerificationTag";
 import GuyPlaceholder from '../../assets/guy-placeholder.jpg';
 import GirlPlaceholder from '../../assets/girl-placeholder.jpg';
-import SignedInContainer from "../../components/signedInContainer";
 
 function Profile(props) {
   return (
-    <SignedInContainer
-      customStyles={{ padding: 0, paddingTop: 0 }}
-      body={() => (
-      <View>
-        <View style={styles.headerImageContainer}>
-          {props.user.picture && (
-            <View>
-              <Image source={{ uri: props.user.picture.url }} style={styles.picture} />
-              <View style={styles.pictureVerificationContainer}>
-                <PictureVerificationTag verified={props.user.picture.verified} />
-              </View>
-            </View>
-          )}
-
-          {!props.user.picture && (
-            <Image
-              source={props.user.sex === 'man' ? GuyPlaceholder : GirlPlaceholder}
-              style={styles.picturePlaceholder}
-            />
-          )}
-        </View>
-
-        <View style={styles.detailContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.userName}>{ props.user.name }</Text>
-            <Text style={styles.userAge}>{ props.user.age }</Text>
-          </View>
-
+    <View>
+      <View style={styles.headerImageContainer}>
+        {props.user.picture && (
           <View>
-            <Text style={styles.subDetail}>From { props.user.location }</Text>
-            <Text style={styles.subDetail}>Interested in { props.user.interested_in.join(' and ') }</Text>
-            <Text style={styles.subDetail}>Looking for { props.user.outcomes.join(' or ') }</Text>
+            <Image source={{ uri: props.user.picture.url }} style={styles.picture} />
+            <View style={styles.pictureVerificationContainer}>
+              <PictureVerificationTag verified={props.user.picture.verified} />
+            </View>
           </View>
+        )}
 
-          <Text style={styles.userBio}>{ props.user.bio }</Text>
-        </View>
+        {!props.user.picture && (
+          <Image
+            source={props.user.sex === 'man' ? GuyPlaceholder : GirlPlaceholder}
+            style={styles.picturePlaceholder}
+          />
+        )}
       </View>
-    )}/>
+
+      <View style={styles.detailContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.userName}>{ props.user.name }</Text>
+          <Text style={styles.userAge}>{ props.user.age }</Text>
+        </View>
+
+        <View>
+          <Text style={styles.subDetail}>From { props.user.location }</Text>
+          <Text style={styles.subDetail}>Interested in { props.user.interested_in.join(' and ') }</Text>
+          <Text style={styles.subDetail}>Looking for { props.user.outcomes.join(' or ') }</Text>
+        </View>
+
+        <Text style={styles.userBio}>{ props.user.bio }</Text>
+      </View>
+    </View>
   )
 }
 
@@ -71,7 +66,7 @@ const styles = StyleSheet.create({
   },
   detailContainer: {
     backgroundColor: 'white',
-    borderColor: '#ccc',
+    borderColor: '#eee',
     borderWidth: 1,
     borderRadius: 10,
     height: 320,
