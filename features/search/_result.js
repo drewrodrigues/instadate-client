@@ -25,7 +25,7 @@ function Date(props) {
         <View style={styles.rightDetailContainer}>
           <TouchableOpacity style={styles.requestButton}>
             <Text style={styles.requestButtonText}>
-              <FontAwesome5 name='heart' size={24} style={styles.icon} />
+              <FontAwesome5 name='bolt' size={24} style={styles.icon} />
             </Text>
           </TouchableOpacity>
 
