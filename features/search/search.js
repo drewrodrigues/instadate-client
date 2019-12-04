@@ -44,14 +44,14 @@ class Search extends React.Component {
       body = <Loading />
     } else {
       if (this.props.results.length !== 0) {
-        body = <View>
+        body = (
           <FlatList
             data={this.props.results}
             renderItem={({ item }) => <Result {...item} />}
             keyExtractor={item => item.id}
             style={styles.list}
           />
-        </View>;
+        );
       } else {
         body = <Placeholder
           icon={SearchPlaceholder}
@@ -119,9 +119,6 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 250
   },
-  // results: {
-  //   height: '100%',
-  // },
   searchHeader: {
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
@@ -142,7 +139,8 @@ const styles = StyleSheet.create({
     fontWeight: '700'
   },
   list: {
-    paddingTop: 20
+    height: '95%', // navbar
+    paddingTop: 20,
   },
   iconLeft: {
     color: 'red',
