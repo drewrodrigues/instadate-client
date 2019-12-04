@@ -5,14 +5,17 @@ import PropTypes from 'prop-types';
 export default function ToggleableStyle({
   activeStyle,
   children,
+  containerStyle = {},
   inactiveStyle,
   selectedValue,
   value
 }) {
   return (
-    <View>
+    <View style={containerStyle}>
       {React.Children.map(children, component => (
-        component
+        React.cloneElement(component, {
+          style: (selectedValue === value ? activeStyle : inactiveStyle)
+        })
       ))}
     </View>
   )
@@ -21,6 +24,7 @@ export default function ToggleableStyle({
 ToggleableStyle.propTypes = {
   activeStyle: PropTypes.object.isRequired,
   children: PropTypes.array.isRequired,
+  containerStyle: PropTypes.object,
   inactiveStyle: PropTypes.object.isRequired,
   selectedValue: PropTypes.oneOfType([
     PropTypes.number.isRequired,
