@@ -29,7 +29,6 @@ function Navigation(props) {
       Search: {
         screen: Search,
         navigationOptions: () => ({
-          title: 'Search',
           tabBarIcon: ({ tintColor }) => (
             <FontAwesome name='search' size={24} color={tintColor} />
           ),
@@ -40,7 +39,6 @@ function Navigation(props) {
           return <Requests />
         },
         navigationOptions: () => ({
-          title: 'Requests',
           tabBarIcon: ({ tintColor }) => (
             <FontAwesome name='bell' size={24} color={tintColor} />
           ),
@@ -51,7 +49,6 @@ function Navigation(props) {
           return <Dates />
         },
         navigationOptions: () => ({
-          title: 'Dates',
           tabBarIcon: ({ tintColor }) => (
             <FontAwesome name='heart' size={24} color={tintColor} />
           ),
@@ -60,7 +57,6 @@ function Navigation(props) {
       Profile: {
         screen: Profile,
         navigationOptions: () => ({
-          title: 'Profile',
           tabBarIcon: ({ tintColor }) => (
             <FontAwesome name='user' size={24} color={tintColor} />
           ),
@@ -69,7 +65,6 @@ function Navigation(props) {
       Settings: {
         screen: Settings,
         navigationOptions: () => ({
-          title: 'Settings',
           tabBarIcon: ({ tintColor }) => (
             <FontAwesome name='cog' size={24} color={tintColor} />
           ),
@@ -78,11 +73,12 @@ function Navigation(props) {
     },
     {
       tabBarOptions: {
-        activeTintColor: 'white',
-        activeBackgroundColor: 'red',
+        activeTintColor: 'red',
+        activeBackgroundColor: 'white',
         inactiveBackgroundColor: 'white',
         inactiveTintColor: '#e9ebee',
         labelStyle: { marginTop: 5 },
+        showLabel: false,
         style: styles.bottomNav,
         tabStyle: styles.bottomNavTab
       },
@@ -108,7 +104,8 @@ const styles = StyleSheet.create({
     bottom: -34,
     height: 75,
     marginTop: -35,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    borderTopWidth: 0,
   },
   bottomNavTab: {
     paddingTop: 10,
