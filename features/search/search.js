@@ -101,7 +101,7 @@ class Search extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e9ebee',
+    backgroundColor: 'white',
     height: '100%',
     padding: 20,
     paddingTop: 35,
@@ -120,11 +120,10 @@ const styles = StyleSheet.create({
     zIndex: 250
   },
   searchHeader: {
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    paddingTop: 20,
+    paddingBottom: 10,
     paddingLeft: 0,
     paddingRight: 0
   },

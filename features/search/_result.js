@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: -15,
     backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#eee',
     borderRadius: 10,
     zIndex: 120,
     padding: 10
@@ -71,8 +73,7 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   detailContainer: {
-    backgroundColor: 'white',
-    borderColor: '#ddd',
+    borderColor: '#eee',
     borderRadius: 10,
     borderWidth: 1,
     padding: 20,
