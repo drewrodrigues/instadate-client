@@ -1,25 +1,25 @@
 // dependencies
-import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-native';
-import { connect } from 'react-redux';
+import React, {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, ScrollView, View} from 'react-native';
+import {connect} from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
 // assets
-import BlankBackground from "../../assets/blankBackground.png";
+import BlankBackground from '../../assets/blankBackground.png';
 import Logo from '../../assets/logo.png';
 
 // components
-import FormTextInput from "../../components/formTextInput";
-import BackgroundImage from "../../components/backgroundImage";
-import FormButton from "../../components/formButton";
-import BackButton from "../../components/backButton";
+import FormTextInput from '../../components/formTextInput';
+import BackgroundImage from '../../components/backgroundImage';
+import FormButton from '../../components/formButton';
+import BackButton from '../../components/backButton';
 
 // functions
-import { signUp } from "./_actions";
-import { uploadImage } from "../imageUpload/_actions";
-import PictureVerificationTag from "../../components/pictureVerificationTag";
-import LocationSearchInput from "../../components/locationSearchInput";
+import {signUp} from './_actions';
+import {uploadImage} from '../imageUpload/_actions';
+import PictureVerificationTag from '../../components/pictureVerificationTag';
+import LocationSearchInput from '../../components/locationSearchInput';
 
 function SignUp(props) {
   const [errors, setErrors] = useState([]);
@@ -46,13 +46,13 @@ function SignUp(props) {
       outcomes: lookingFor,
       bio,
       name,
-      picture_id: uploadedImage.id
-    }).catch(errorMessages => setErrors(errorMessages));
+      picture_id: uploadedImage.id,
+    }).catch((errorMessages) => setErrors(errorMessages));
   }
 
   function toggleLookingFor(value) {
     if (lookingFor.includes(value)) {
-      setLookingFor(lookingFor.filter(outcome => outcome !== value));
+      setLookingFor(lookingFor.filter((outcome) => outcome !== value));
     } else {
       setLookingFor(lookingFor.concat(value));
     }
@@ -60,7 +60,7 @@ function SignUp(props) {
 
   function toggleInterestedIn(value) {
     if (interestedIn.includes(value)) {
-      setInterestedIn(interestedIn.filter(outcome => outcome !== value));
+      setInterestedIn(interestedIn.filter((outcome) => outcome !== value));
     } else {
       setInterestedIn(interestedIn.concat(value));
     }
@@ -68,9 +68,9 @@ function SignUp(props) {
 
   async function launchImageLibrary() {
     const permission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    const response = await ImagePicker.launchImageLibraryAsync({ base64: true });
+    const response = await ImagePicker.launchImageLibraryAsync({base64: true});
     const fileName = response.uri.replace(/.*ImagePicker\//, '');
-    const uploadedImage = await uploadImage({ file: response.base64, file_name: fileName });
+    const uploadedImage = await uploadImage({file: response.base64, file_name: fileName});
     setUploadedImage(uploadedImage.data);
     setPicture(response);
   }
@@ -96,11 +96,11 @@ function SignUp(props) {
 
           {/* Profile Picture */}
           <View style={styles.profilePictureContainer}>
-            <Image source={{ uri: picture.uri }} style={styles.profilePicture} />
+            <Image source={{uri: picture.uri}} style={styles.profilePicture} />
             { uploadedImage && (
               <View style={styles.pendingVerification}>
                 <PictureVerificationTag verified={uploadedImage.verified} />
-                {/*<Text style={styles.pendingVerificationText}>Pending Verification</Text>*/}
+                {/* <Text style={styles.pendingVerificationText}>Pending Verification</Text>*/}
               </View>
             )}
             <TouchableOpacity onPress={launchImageLibrary}>
@@ -144,7 +144,7 @@ function SignUp(props) {
             placeholder='Bio'
             updateCallback={setBio}
             noteText={`${200 - bio.length} characters left`}
-            extraStyles={{ height: 150 }}
+            extraStyles={{height: 150}}
             multiline={true}
             value={bio}
           />
@@ -153,14 +153,14 @@ function SignUp(props) {
           <Text style={styles.iAmLabel}>I am a...</Text>
           <View style={styles.radioSelections}>
             <TouchableOpacity
-              style={sex === 'man' ? { ...styles.checkedRadio, backgroundColor: 'blue' } : styles.radio}
+              style={sex === 'man' ? {...styles.checkedRadio, backgroundColor: 'blue'} : styles.radio}
               onPress={() => setSex('man')}
             >
               <Text style={styles.radioText}>Man</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={sex === 'woman' ? { ...styles.checkedRadio, backgroundColor: 'pink' } : styles.radio}
+              style={sex === 'woman' ? {...styles.checkedRadio, backgroundColor: 'pink'} : styles.radio}
               onPress={() => setSex('woman')}
             >
               <Text style={styles.radioText}>Woman</Text>
@@ -171,14 +171,14 @@ function SignUp(props) {
           <Text style={styles.iAmLabel}>Interested in...</Text>
           <View style={styles.radioSelections}>
             <TouchableOpacity
-              style={interestedIn.includes('man') ? { ...styles.checkedRadio, backgroundColor: 'blue' } : styles.radio}
+              style={interestedIn.includes('man') ? {...styles.checkedRadio, backgroundColor: 'blue'} : styles.radio}
               onPress={() => toggleInterestedIn('man')}
             >
               <Text style={styles.radioText}>Men</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={interestedIn.includes('woman') ? { ...styles.checkedRadio, backgroundColor: 'pink' } : styles.radio}
+              style={interestedIn.includes('woman') ? {...styles.checkedRadio, backgroundColor: 'pink'} : styles.radio}
               onPress={() => toggleInterestedIn('woman')}
             >
               <Text style={styles.radioText}>Women</Text>
@@ -189,21 +189,21 @@ function SignUp(props) {
           <Text style={styles.iAmLabel}>Looking for...</Text>
           <View style={styles.radioSelections}>
             <TouchableOpacity
-              style={lookingFor.includes('dating') ? { ...styles.checkedRadio, backgroundColor: 'red' } : styles.radio}
+              style={lookingFor.includes('dating') ? {...styles.checkedRadio, backgroundColor: 'red'} : styles.radio}
               onPress={() => toggleLookingFor('dating')}
             >
               <Text style={styles.radioText}>Dating</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={lookingFor.includes('hookups') ? { ...styles.checkedRadio, backgroundColor: 'orange' } : styles.radio}
+              style={lookingFor.includes('hookups') ? {...styles.checkedRadio, backgroundColor: 'orange'} : styles.radio}
               onPress={() => toggleLookingFor('hookups')}
             >
               <Text style={styles.radioText}>Hookups</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={lookingFor.includes('relationship') ? { ...styles.checkedRadio, backgroundColor: 'purple' } : styles.radio}
+              style={lookingFor.includes('relationship') ? {...styles.checkedRadio, backgroundColor: 'purple'} : styles.radio}
               onPress={() => toggleLookingFor('relationship')}
             >
               <Text style={styles.radioText}>Relationship</Text>
@@ -215,7 +215,7 @@ function SignUp(props) {
         </View>
       </ScrollView>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -231,10 +231,10 @@ const styles = StyleSheet.create({
   },
   iAmLabel: {
     color: 'white',
-    marginBottom: 10
+    marginBottom: 10,
   },
   profilePictureContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   pendingVerification: {
     position: 'absolute',
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   profilePictureText: {
     color: 'white',
     padding: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   logo: {
     alignSelf: 'center',
@@ -263,14 +263,14 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   errorContainer: {
-    padding: 40
+    padding: 40,
   },
   error: {
     backgroundColor: 'red',
     borderRadius: 10,
     color: 'white',
     padding: 5,
-    marginBottom: 10
+    marginBottom: 10,
   },
   input: {
     alignSelf: 'stretch',
@@ -281,12 +281,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     marginBottom: 20,
-    padding: 20
+    padding: 20,
   },
   radioSelections: {
     flexDirection: 'row',
     marginBottom: 20,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   radio: {
     borderColor: '#333',
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   },
   radioText: {
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   checkedRadio: {
     borderColor: '#222',
@@ -310,16 +310,16 @@ const styles = StyleSheet.create({
   },
   submitText: {
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   label: {
     color: 'white',
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
 
-const mapDispatchToProps = dispatch => ({
-  signUp: user => dispatch(signUp(user))
+const mapDispatchToProps = (dispatch) => ({
+  signUp: (user) => dispatch(signUp(user)),
 });
 
 export default connect(null, mapDispatchToProps)(SignUp);

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { connect } from 'react-redux';
-import PictureVerificationTag from "../../components/pictureVerificationTag";
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {connect} from 'react-redux';
+import PictureVerificationTag from '../../components/pictureVerificationTag';
 import GuyPlaceholder from '../../assets/guy-placeholder.jpg';
 import GirlPlaceholder from '../../assets/girl-placeholder.jpg';
 
@@ -11,7 +11,7 @@ function Profile(props) {
       <View style={styles.headerImageContainer}>
         {props.user.picture && (
           <View>
-            <Image source={{ uri: props.user.picture.url }} style={styles.picture} />
+            <Image source={{uri: props.user.picture.url}} style={styles.picture} />
             <View style={styles.pictureVerificationContainer}>
               <PictureVerificationTag verified={props.user.picture.verified} />
             </View>
@@ -41,17 +41,17 @@ function Profile(props) {
         <Text style={styles.userBio}>{ props.user.bio }</Text>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   headerImageContainer: {
-    position: 'relative'
+    position: 'relative',
   },
   picture: {
     height: 600,
     resizeMode: 'cover',
-    width: '100%'
+    width: '100%',
   },
   picturePlaceholder: {
     backgroundColor: '#ccc',
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     top: 50,
-    right: 20
+    right: 20,
   },
   detailContainer: {
     backgroundColor: 'white',
@@ -73,16 +73,16 @@ const styles = StyleSheet.create({
     marginTop: -120,
     marginLeft: 20,
     marginRight: 20,
-    padding: 40
+    padding: 40,
   },
   headerContainer: {
     flexDirection: 'row',
     marginBottom: 10,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   userName: {
     fontSize: 32,
-    fontWeight: '700'
+    fontWeight: '700',
   },
   userAge: {
     color: '#e4555f',
@@ -92,16 +92,16 @@ const styles = StyleSheet.create({
   subDetail: {
     color: '#777',
     fontSize: 12,
-    marginTop: 6
+    marginTop: 6,
   },
   userBio: {
     lineHeight: 24,
-    marginTop: 20
+    marginTop: 20,
   },
 });
 
-const mapStateToProps = state => ({
-  user: state.session
+const mapStateToProps = (state) => ({
+  user: state.session,
 });
 
 export default connect(mapStateToProps)(Profile);

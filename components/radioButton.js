@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 
 export default function RadioButton({
@@ -9,7 +9,7 @@ export default function RadioButton({
   key,
   selectedValue,
   value,
-  updateCallback
+  updateCallback,
 }) {
   return (
     <TouchableOpacity
@@ -19,7 +19,7 @@ export default function RadioButton({
     >
       {children}
     </TouchableOpacity>
-  )
+  );
 }
 
 RadioButton.propTypes = {
@@ -29,11 +29,11 @@ RadioButton.propTypes = {
   key: PropTypes.string.isRequired,
   selectedValue: PropTypes.oneOfType([
     PropTypes.number,
-    PropTypes.string
+    PropTypes.string,
   ]).isRequired,
   value: PropTypes.oneOfType([
     PropTypes.number,
-    PropTypes.string
+    PropTypes.string,
   ]).isRequired,
-  updateCallback: PropTypes.func.isRequired
+  updateCallback: PropTypes.func.isRequired,
 };

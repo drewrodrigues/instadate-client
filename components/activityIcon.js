@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import {FontAwesome5} from "@expo/vector-icons";
+import {StyleSheet} from 'react-native';
+import {FontAwesome5} from '@expo/vector-icons';
 
 
-export default function ({ activity }) {
+export default function({activity}) {
   const activityToIconName = {
     'anything': 'question',
     'coffee': 'coffee',
@@ -14,7 +14,7 @@ export default function ({ activity }) {
     'other': 'question',
     'skating': 'skating',
     'tea': 'mug-hot',
-    'walk': 'walking'
+    'walk': 'walking',
   };
 
   return (
@@ -23,11 +23,11 @@ export default function ({ activity }) {
       size={16}
       style={styles.icon}
     />
-  )
+  );
 }
 
 const styles = StyleSheet.create({
- icon: {
-   color: 'red'
- }
+  icon: {
+    color: 'red',
+  },
 });

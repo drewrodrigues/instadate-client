@@ -1,35 +1,35 @@
 import React from 'react';
 import Navigation from './components/navigation';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { Provider } from 'react-redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './features/session/_reducer';
-import { AsyncStorage } from 'react-native';
+import {AsyncStorage} from 'react-native';
 import datesReducer from './features/dates/_reducer';
 import permissionsReducer from './features/permissions/_reducer';
 import searchReducer from './features/search/_reducer';
 import userReducer from './features/users/_reducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 console.disableYellowBox = true;
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { store: null };
+    this.state = {store: null};
     this._checkSession();
   }
 
   async _checkSession() {
     let session = await AsyncStorage.getItem('@session');
-    let location = await AsyncStorage.getItem('@location');
+    const location = await AsyncStorage.getItem('@location');
     let preloadedState = {};
 
     if (session) {
       session = JSON.parse(session);
       preloadedState = {
-        permissions: { location },
-        session
+        permissions: {location},
+        session,
       };
     }
 
@@ -40,11 +40,11 @@ export default class App extends React.Component {
           dates: datesReducer,
           permissions: permissionsReducer,
           search: searchReducer,
-          users: userReducer
+          users: userReducer,
         }),
         preloadedState,
-        composeWithDevTools(applyMiddleware(thunk))
-      )
+        composeWithDevTools(applyMiddleware(thunk)),
+      ),
     });
   }
 
@@ -57,6 +57,6 @@ export default class App extends React.Component {
       <Provider store={this.state.store}>
         <Navigation />
       </Provider>
-    )
+    );
   }
 }

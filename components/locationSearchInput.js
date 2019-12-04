@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import axios from '../config/axios';
-import FormTextInput from "./formTextInput";
+import FormTextInput from './formTextInput';
 
-export default function LocationSearchInput({ callback, placeholder, value }) {
+export default function LocationSearchInput({callback, placeholder, value}) {
   const [validLocations, setValidLocations] = useState([]);
   const [hasSelectedLocation, setHasSelectedLocation] = useState(false);
 
@@ -12,7 +12,7 @@ export default function LocationSearchInput({ callback, placeholder, value }) {
       setHasSelectedLocation(true);
       setValidLocations([]);
     } else if (value && !hasSelectedLocation) {
-      queryForValidLocations()
+      queryForValidLocations();
     } else {
       setValidLocations([]);
     }
@@ -23,7 +23,7 @@ export default function LocationSearchInput({ callback, placeholder, value }) {
 
     const response = await axios({
       method: 'get',
-      url: `/locations?search_query=${value}`
+      url: `/locations?search_query=${value}`,
     });
 
     setValidLocations(response.data);
@@ -41,14 +41,14 @@ export default function LocationSearchInput({ callback, placeholder, value }) {
   }
 
   return (
-    <View style={{ position: 'relative' }}>
+    <View style={{position: 'relative'}}>
       <FormTextInput updateCallback={typing} value={value} placeholder={placeholder} />
       { hasSelectedLocation && (<Text style={styles.validLocation}>Valid Location</Text>) }
       { !hasSelectedLocation && (<Text style={styles.invalidLocation}>Invalid Location</Text>) }
 
       {validLocations.length > 0 && (
         <View style={styles.suggestionContainer}>
-          {validLocations.map(location => (
+          {validLocations.map((location) => (
             <TouchableOpacity key={location} onPress={() => selectLocation(location)} style={styles.suggestion}>
               <Text style={styles.suggestionText}>{location}</Text>
             </TouchableOpacity>
@@ -56,7 +56,7 @@ export default function LocationSearchInput({ callback, placeholder, value }) {
         </View>
       )}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -65,29 +65,29 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     marginBottom: 20,
-    marginTop: -22
+    marginTop: -22,
   },
   suggestion: {
     borderTopWidth: 1,
     borderTopColor: 'orangered',
-    padding: 20
+    padding: 20,
   },
   suggestionText: {
     color: 'white',
-    fontSize: 12
+    fontSize: 12,
   },
   invalidLocation: {
     color: 'red',
     position: 'absolute',
     top: 0,
     right: 0,
-    fontSize: 12
+    fontSize: 12,
   },
   validLocation: {
     color: 'limegreen',
     position: 'absolute',
     top: 0,
     right: 0,
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });

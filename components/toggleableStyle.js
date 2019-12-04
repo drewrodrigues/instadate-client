@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import {View} from 'react-native';
 import PropTypes from 'prop-types';
 
 export default function ToggleableStyle({
@@ -8,17 +8,17 @@ export default function ToggleableStyle({
   containerStyle = {},
   inactiveStyle,
   selectedValue,
-  value
+  value,
 }) {
   return (
     <View style={containerStyle}>
-      {React.Children.map(children, component => (
+      {React.Children.map(children, (component) => (
         React.cloneElement(component, {
-          style: (selectedValue === value ? activeStyle : inactiveStyle)
+          style: (selectedValue === value ? activeStyle : inactiveStyle),
         })
       ))}
     </View>
-  )
+  );
 }
 
 ToggleableStyle.propTypes = {

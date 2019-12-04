@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { FontAwesome5 } from "@expo/vector-icons";
+import {connect} from 'react-redux';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FontAwesome5} from '@expo/vector-icons';
 import ActivityIcon from '../../components/activityIcon';
 
 function Date(props) {
@@ -34,7 +34,7 @@ function Date(props) {
 
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     height: 100,
     position: 'absolute',
     width: 100,
-    zIndex: 100
+    zIndex: 100,
   },
   activityIconContainer: {
     position: 'absolute',
@@ -58,19 +58,19 @@ const styles = StyleSheet.create({
     borderColor: '#eee',
     borderRadius: 10,
     zIndex: 120,
-    padding: 10
+    padding: 10,
   },
   textContainer: {
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   locationIcon: {
     color: '#ccc',
-    marginRight: 5
+    marginRight: 5,
   },
   locationText: {
     color: '#ccc',
-    fontSize: 12
+    fontSize: 12,
   },
   detailContainer: {
     borderColor: '#eee',
@@ -80,10 +80,10 @@ const styles = StyleSheet.create({
     paddingLeft: 55,
     marginLeft: 60,
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   leftDetailContainer: {
-    flex: 2
+    flex: 2,
   },
   rightDetailContainer: {
     alignItems: 'flex-end',
@@ -92,22 +92,22 @@ const styles = StyleSheet.create({
   },
   distance: {
     color: '#ccc',
-    fontSize: 12
+    fontSize: 12,
   },
   requestButton: {
   },
   requestButtonText: {
-    color: '#e9ebee'
+    color: '#e9ebee',
   },
   userName: {
     fontSize: 20,
     fontWeight: '700',
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.users.find(user => user.id == ownProps.creator_id)
+  user: state.users.find((user) => user.id == ownProps.creator_id),
 });
 
 export default connect(mapStateToProps)(Date);

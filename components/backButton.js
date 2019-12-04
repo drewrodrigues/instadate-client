@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 /*
 Example usage:
@@ -13,7 +13,7 @@ export default function BackButton(props) {
     <TouchableOpacity style={styles.container} onPress={() => props.navigation.goBack()}>
       <Text style={styles.text}>{'< Back'}</Text>
     </TouchableOpacity>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     left: 20,
     position: 'absolute',
     top: 60,
-    zIndex: 100
+    zIndex: 100,
   },
   text: {
     color: 'white',
-  }
+  },
 });

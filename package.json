@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "npx eslint --fix features/ components/ helpers/ environment.js App.js"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -30,7 +31,9 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^7.1.0"
+    "babel-preset-expo": "^7.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-react": "^7.17.0"
   },
   "private": true
 }

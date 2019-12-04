@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import LandingBackground from '../../assets/landing.png';
-import BackgroundImage from "../../components/backgroundImage";
+import BackgroundImage from '../../components/backgroundImage';
 
 export default function Landing(props) {
-  const { navigate } = props.navigation;
+  const {navigate} = props.navigation;
 
   return (
     <View style={styles.container}>
@@ -25,31 +25,31 @@ export default function Landing(props) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   buttonContainer: {
     marginBottom: 25,
-    padding: 40
+    padding: 40,
   },
   signUpButton: {
     backgroundColor: 'red',
     borderRadius: 10,
     marginTop: 20,
-    padding: 20
+    padding: 20,
   },
   buttonText: {
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   signUpButtonText: {
     color: 'white',
     fontWeight: '700',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });

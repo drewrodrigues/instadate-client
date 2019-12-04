@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 
 /*
 Nest within a <View> that has the following properties set:
@@ -10,10 +10,10 @@ container: {
 }
  */
 
-export default function BackgroundImage({ image }) {
+export default function BackgroundImage({image}) {
   return (
     <Image source={image} style={styles.background} />
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -26,5 +26,5 @@ const styles = StyleSheet.create({
     right: 0,
     width: '100%',
     height: '100%',
-  }
+  },
 });

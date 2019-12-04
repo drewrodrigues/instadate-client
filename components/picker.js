@@ -1,8 +1,7 @@
 import React from 'react';
-import { Alert, Picker, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {Alert, Picker, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-export default function PickerWithButton({ close, updateCallback, value }) {
-
+export default function PickerWithButton({close, updateCallback, value}) {
   function checkForPremiumAndUpdate(value) {
     if (value > 15) {
       Alert.alert('Premium Required', 'Please subscribe to search above 10 miles');
@@ -32,7 +31,7 @@ export default function PickerWithButton({ close, updateCallback, value }) {
         <Picker.Item label="100 miles" value={100} />
       </Picker>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -46,17 +45,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 0
+    marginTop: 0,
   },
   close: {
     padding: 10,
     marginRight: -10,
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   selectDistance: {
     fontWeight: '700',
   },
   picker: {
     marginBottom: -20,
-  }
+  },
 });

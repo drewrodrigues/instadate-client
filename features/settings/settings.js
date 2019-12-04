@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { connect } from 'react-redux';
-import { logout } from "./_actions";
-import { FontAwesome } from '@expo/vector-icons';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {connect} from 'react-redux';
+import {logout} from './_actions';
+import {FontAwesome} from '@expo/vector-icons';
 
 function Settings(props) {
   return (
@@ -12,7 +12,7 @@ function Settings(props) {
         <FontAwesome name='sign-out' size={24} style={styles.icon} />
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -22,18 +22,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20
+    padding: 20,
   },
   icon: {
-    color: '#ccc'
+    color: '#ccc',
   },
   buttonText: {
-    color: 'black'
-  }
+    color: 'black',
+  },
 });
 
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout())
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(logout()),
 });
 
 export default connect(null, mapDispatchToProps)(Settings);

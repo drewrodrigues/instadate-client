@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import FormTextInput from "../../components/formTextInput";
-import FormButton from "../../components/formButton";
-import { createOrUpdateDate } from "./_action";
-import { FontAwesome5 } from '@expo/vector-icons';
-import RadioButton from "../../components/radioButton";
-import ToggleableStyle from "../../components/toggleableStyle";
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import FormTextInput from '../../components/formTextInput';
+import FormButton from '../../components/formButton';
+import {createOrUpdateDate} from './_action';
+import {FontAwesome5} from '@expo/vector-icons';
+import RadioButton from '../../components/radioButton';
+import ToggleableStyle from '../../components/toggleableStyle';
 
 function DateForm({
   close,
@@ -17,7 +17,7 @@ function DateForm({
   const [time, setTime] = useState(date ? date.time : '');
 
   function handleSubmit() {
-    const params = { activity, time };
+    const params = {activity, time};
     const action = date ? 'UPDATE' : 'CREATE';
     createOrUpdateDate(params, action)
       .then(close);
@@ -28,16 +28,16 @@ function DateForm({
       <View style={styles.container}>
         <View style={styles.activities}>
           {[
-            { label: 'Anything', name: 'anything', icon: 'question' },
-            { label: 'Coffee', name: 'coffee', icon: 'coffee' },
-            { label: 'Drinks', name: 'drinks', icon: 'cocktail' },
-            { label: 'Food', name: 'food', icon: 'utensils' },
-            { label: 'Hike', name: 'hike', icon: 'hiking' },
-            { label: 'Movie', name: 'movie', icon: 'film' },
-            { label: 'Skating', name: 'skating', icon: 'skating' },
-            { label: 'Tea', name: 'tea', icon: 'mug-hot' },
-            { label: 'Walk', name: 'walk', icon: 'walking' }
-          ].map(activityOption => (
+            {label: 'Anything', name: 'anything', icon: 'question'},
+            {label: 'Coffee', name: 'coffee', icon: 'coffee'},
+            {label: 'Drinks', name: 'drinks', icon: 'cocktail'},
+            {label: 'Food', name: 'food', icon: 'utensils'},
+            {label: 'Hike', name: 'hike', icon: 'hiking'},
+            {label: 'Movie', name: 'movie', icon: 'film'},
+            {label: 'Skating', name: 'skating', icon: 'skating'},
+            {label: 'Tea', name: 'tea', icon: 'mug-hot'},
+            {label: 'Walk', name: 'walk', icon: 'walking'},
+          ].map((activityOption) => (
             <RadioButton
               activeStyle={styles.activityButtonSelected}
               inactiveStyle={styles.activityButton}
@@ -45,16 +45,16 @@ function DateForm({
               selectedValue={activity}
               value={activityOption.name}
               updateCallback={setActivity}
-           >
+            >
               <ToggleableStyle
-                activeStyle={{ color: 'white' }}
-                containerStyle={{ alignItems: 'center' }}
-                inactiveStyle={{ color: 'black' }}
+                activeStyle={{color: 'white'}}
+                containerStyle={{alignItems: 'center'}}
+                inactiveStyle={{color: 'black'}}
                 selectedValue={activityOption.name}
                 value={activity}
               >
-                <FontAwesome5 name={activityOption.icon} size={32} style={{ color: 'white' }}/>
-                <Text style={{ color: 'white' }}>{activityOption.label}</Text>
+                <FontAwesome5 name={activityOption.icon} size={32} style={{color: 'white'}}/>
+                <Text style={{color: 'white'}}>{activityOption.label}</Text>
               </ToggleableStyle>
             </RadioButton>
           ))}
@@ -67,11 +67,11 @@ function DateForm({
           <TouchableOpacity onPress={() => close()} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>Cancel</Text>
           </TouchableOpacity>
-          <FormButton text={date ? 'Update Date' : 'Add Date'} handleSubmit={handleSubmit} customStyles={{ width: '50%' }}/>
+          <FormButton text={date ? 'Update Date' : 'Add Date'} handleSubmit={handleSubmit} customStyles={{width: '50%'}}/>
         </View>
       </View>
     </Modal>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -86,21 +86,21 @@ const styles = StyleSheet.create({
     width: '50%',
     borderRadius: 10,
     marginTop: 20,
-    padding: 20
+    padding: 20,
   },
   closeButtonText: {
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   label: {
     color: 'white',
     fontSize: 14,
     marginBottom: 10,
-    marginTop: 20
+    marginTop: 20,
   },
   activities: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   activityButton: {
     borderColor: 'black',
@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: '33.3333%',
-    width: '33.3333%'
+    width: '33.3333%',
   },
   activityButtonText: {
-    color: '#777'
+    color: '#777',
   },
   activityButtonSelected: {
     borderColor: 'darkred',
@@ -121,24 +121,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: '33.3333%',
-    width: '33.3333%'
+    width: '33.3333%',
   },
   icon: {
-    marginBottom: 10
+    marginBottom: 10,
   },
   buttons: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around'
-  }
+    justifyContent: 'space-around',
+  },
 });
 
-const mapStateToProps = state => ({
-  date: state.dates.find(date => date.creator_id == state.session.id)
+const mapStateToProps = (state) => ({
+  date: state.dates.find((date) => date.creator_id == state.session.id),
 });
 
-const mapDispatchToProps = dispatch => ({
-  createOrUpdateDate: (date, action) => dispatch(createOrUpdateDate(date, action))
+const mapDispatchToProps = (dispatch) => ({
+  createOrUpdateDate: (date, action) => dispatch(createOrUpdateDate(date, action)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DateForm);
