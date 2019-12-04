@@ -26,6 +26,7 @@ RadioButton.propTypes = {
   activeStyle: PropTypes.object.isRequired,
   inactiveStyle: PropTypes.object.isRequired,
   children: PropTypes.element.isRequired,
+  key: PropTypes.string.isRequired,
   selectedValue: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string
