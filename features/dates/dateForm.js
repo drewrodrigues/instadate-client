@@ -28,15 +28,15 @@ function DateForm({
       <View style={styles.container}>
         <View style={styles.activities}>
           {[
-            { name: 'anything', icon: 'question' },
-            { name: 'coffee', icon: 'coffee' },
-            { name: 'drinks', icon: 'cocktail' },
-            { name: 'food', icon: 'utensils' },
-            { name: 'hike', icon: 'hiking' },
-            { name: 'movie', icon: 'film' },
-            { name: 'skating', icon: 'skating' },
-            { name: 'tea', icon: 'mug-hot' },
-            { name: 'walk', icon: 'walking' }
+            { label: 'Anything', name: 'anything', icon: 'question' },
+            { label: 'Coffee', name: 'coffee', icon: 'coffee' },
+            { label: 'Drinks', name: 'drinks', icon: 'cocktail' },
+            { label: 'Food', name: 'food', icon: 'utensils' },
+            { label: 'Hike', name: 'hike', icon: 'hiking' },
+            { label: 'Movie', name: 'movie', icon: 'film' },
+            { label: 'Skating', name: 'skating', icon: 'skating' },
+            { label: 'Tea', name: 'tea', icon: 'mug-hot' },
+            { label: 'Walk', name: 'walk', icon: 'walking' }
           ].map(activityOption => (
             <RadioButton
               activeStyle={styles.activityButtonSelected}
@@ -48,12 +48,13 @@ function DateForm({
            >
               <ToggleableStyle
                 activeStyle={{ color: 'white' }}
+                containerStyle={{ alignItems: 'center' }}
                 inactiveStyle={{ color: 'black' }}
                 selectedValue={activityOption.name}
                 value={activity}
               >
                 <FontAwesome5 name={activityOption.icon} size={32} style={{ color: 'white' }}/>
-                <Text style={{ color: 'white' }}>{activityOption.name}</Text>
+                <Text style={{ color: 'white' }}>{activityOption.label}</Text>
               </ToggleableStyle>
             </RadioButton>
           ))}
