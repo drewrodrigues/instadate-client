@@ -8,6 +8,7 @@ import {AsyncStorage} from 'react-native';
 import datesReducer from './features/dates/_reducer';
 import permissionsReducer from './features/permissions/_reducer';
 import searchReducer from './features/search/_reducer';
+import sparksReducer from './features/sparks/_reducer';
 import userReducer from './features/users/_reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
@@ -40,6 +41,7 @@ export default class App extends React.Component {
           dates: datesReducer,
           permissions: permissionsReducer,
           search: searchReducer,
+          sparks: sparksReducer,
           users: userReducer,
         }),
         preloadedState,
