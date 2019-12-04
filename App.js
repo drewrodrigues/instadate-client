@@ -22,11 +22,15 @@ export default class App extends React.Component {
 
   async _checkSession() {
     let session = await AsyncStorage.getItem('@session');
+    let location = await AsyncStorage.getItem('@location');
     let preloadedState = {};
 
     if (session) {
       session = JSON.parse(session);
-      preloadedState = { session };
+      preloadedState = {
+        permissions: { location },
+        session
+      };
     }
 
     this.setState({
