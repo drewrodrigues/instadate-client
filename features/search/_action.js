@@ -1,7 +1,7 @@
 import axios from '../../config/axios';
 import {receiveUsers} from '../users/_actions';
 import {getCoordinates} from '../permissions/_actions';
-import {receiveSpark} from '../sparks/_actions';
+import {receiveSpark, receiveSparks} from '../sparks/_actions';
 
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';
@@ -24,12 +24,13 @@ export const search = (distance) => async (dispatch) => {
     url: '/search',
     params: {...coordinates, distance},
   })
-    .then((res) => {
-      dispatch({type: 'SEARCH_SUCCESS'});
+    .then((response) => {
+      dispatch({type: 'SEARCH_SUCCESS', response});
 
-      dispatch(receiveSearch(res.data.dates));
-      dispatch(receiveUsers(res.data.users));
-      return Promise.resolve(res.data);
+      dispatch(receiveSearch(response.data.dates));
+      dispatch(receiveUsers(response.data.users));
+      dispatch(receiveSparks(response.data.sent_sparks));
+      return Promise.resolve(response.data);
     })
     .catch((err) => {
       dispatch({type: 'SEARCH_FAIL', error: err});

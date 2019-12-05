@@ -9,7 +9,7 @@ export const receiveSpark = (spark) => ({
   spark
 });
 
-const receiveSparks = (sparks) => ({
+export const receiveSparks = (sparks) => ({
   type: RECEIVE_SPARKS,
   sparks
 });
