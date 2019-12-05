@@ -1,18 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {FontAwesome5} from '@expo/vector-icons';
 import ActivityIcon from '../../components/activityIcon';
+import {sendSpark} from './_action';
 
 function Date(props) {
+  const [note, setNote] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  function sendSpark() {
+    props.sendNote({ instadate_id: props.id, note });
+  }
+
   return (
     <View style={styles.container}>
       { props.user.picture && <Image source={props.user.picture} style={styles.image}/> }
+
       <View style={styles.activityIconContainer}>
         <ActivityIcon activity={props.activity} />
       </View>
 
-      <View style={styles.detailContainer}>
+      { !showModal && (<View style={styles.detailContainer}>
         <View style={styles.leftDetailContainer}>
           <Text style={styles.userName}>{ props.user.name }</Text>
 
@@ -23,7 +32,7 @@ function Date(props) {
         </View>
 
         <View style={styles.rightDetailContainer}>
-          <TouchableOpacity style={styles.requestButton}>
+          <TouchableOpacity style={styles.requestButton} onPress={() => setShowModal(true)}>
             <Text style={styles.requestButtonText}>
               <FontAwesome5 name='bolt' size={24} style={styles.icon} />
             </Text>
@@ -31,14 +40,68 @@ function Date(props) {
 
           <Text style={styles.distance}>{props.distance} miles away</Text>
         </View>
+      </View>)}
 
-      </View>
+      { showModal && (<View style={styles.detailContainer}>
+        <View style={styles.confirmationContainer}>
+          <TextInput placeholder='Send a note... (optional)' />
+
+          <View style={styles.confirmationButtonsContainer}>
+            <TouchableOpacity
+              onPress={() => setShowModal(false)}
+              style={{ ...styles.confirmationButton, ...styles.cancelButton }}
+            >
+              <Text style={styles.confirmationButtonText}>Cancel</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{ ...styles.confirmationButton, ...styles.sendButton }}>
+              <FontAwesome5 name='bolt' size={10} style={{ ...styles.confirmationButtonText, ...styles.confirmationButtonIcon }} />
+              <Text style={styles.confirmationButtonText}>Send</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>)}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  confirmationContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  confirmationButtonsContainer: {
+    alignItems: 'flex-end',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  confirmationButton: {
+    borderRadius: 10,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  confirmationButtonText: {
+    color: 'white',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  confirmationButtonIcon: {
+    marginRight: 5,
+  },
+  cancelButton: {
+    backgroundColor: '#ccc',
+  },
+  sendButton: {
+    backgroundColor: 'red',
+    marginLeft: 5,
+  },
   container: {
+    height: 100,
     justifyContent: 'center',
     marginBottom: 30,
   },
