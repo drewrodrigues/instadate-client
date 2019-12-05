@@ -10,7 +10,8 @@ function Date(props) {
   const [showModal, setShowModal] = useState(false);
 
   function sendSpark() {
-    props.sendNote({ instadate_id: props.id, note });
+    setShowModal(false);
+    props.sendSpark({ instadate_id: props.id, note });
   }
 
   return (
@@ -44,7 +45,7 @@ function Date(props) {
 
       { showModal && (<View style={styles.detailContainer}>
         <View style={styles.confirmationContainer}>
-          <TextInput placeholder='Send a note... (optional)' />
+          <TextInput placeholder='Send a note... (optional)' onChangeText={val => setNote(val)}/>
 
           <View style={styles.confirmationButtonsContainer}>
             <TouchableOpacity
@@ -54,7 +55,10 @@ function Date(props) {
               <Text style={styles.confirmationButtonText}>Cancel</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ ...styles.confirmationButton, ...styles.sendButton }}>
+            <TouchableOpacity
+              onPress={sendSpark}
+              style={{ ...styles.confirmationButton, ...styles.sendButton }}
+            >
               <FontAwesome5 name='bolt' size={10} style={{ ...styles.confirmationButtonText, ...styles.confirmationButtonIcon }} />
               <Text style={styles.confirmationButtonText}>Send</Text>
             </TouchableOpacity>
@@ -173,4 +177,8 @@ const mapStateToProps = (state, ownProps) => ({
   user: state.users.find((user) => user.id == ownProps.creator_id),
 });
 
-export default connect(mapStateToProps)(Date);
+const mapDispatchToProps = (dispatch) => ({
+  sendSpark: (spark) => dispatch(sendSpark(spark))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Date);

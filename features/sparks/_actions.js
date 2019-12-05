@@ -4,7 +4,7 @@ import {receiveUsers} from "../users/_actions";
 export const RECEIVE_SPARK = 'RECEIVE_SPARK';
 export const RECEIVE_SPARKS = 'RECEIVE_SPARKS';
 
-const receiveSpark = (spark) => ({
+export const receiveSpark = (spark) => ({
   type: RECEIVE_SPARK,
   spark
 });
