@@ -73,25 +73,38 @@ class Search extends React.Component {
         )}
 
         <View style={styles.searchHeader}>
-          <View style={styles.textContainer}>
-            <FontAwesome5 name='calendar-day' size={16} style={styles.iconLeft} />
-            {this.state.loading && (
-              <Text style={styles.text}>Searching dates today</Text>
-            )}
+          <View style={styles.searchHeaderSection}>
+            <View style={styles.textContainer}>
+              {this.state.loading && (
+                <Text style={styles.text}>Searching dates today</Text>
+              )}
 
-            {!this.state.loading && <>
-              <Text style={styles.text}>Found</Text>
-              <Text style={styles.textWeighted}> {this.props.results.length }</Text>
-              <Text style={styles.text}> dates today</Text>
-            </>}
+              {!this.state.loading && <>
+                <Text style={styles.text}>Found</Text>
+                <Text style={styles.textWeighted}> {this.props.results.length }</Text>
+                <Text style={styles.text}> dates today</Text>
+              </>}
+
+              <TouchableOpacity style={styles.textContainer} onPress={() => this.setState({showPicker: !this.state.showPicker})}>
+                <Text style={styles.text}> within</Text>
+                <Text style={styles.textWeighted}> {this.state.distance} miles</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>Filter</Text>
+              <FontAwesome5 name='filter' size={16} style={styles.iconRight} />
+            </View>
           </View>
 
-          <TouchableOpacity style={styles.textContainer} onPress={() => this.setState({showPicker: !this.state.showPicker})}>
-            <Text style={styles.text}> within</Text>
-            <Text style={styles.textWeighted}> {this.state.distance} miles</Text>
-            <FontAwesome5 name='map-marker-alt' size={16} style={styles.iconRight} />
-          </TouchableOpacity>
+          <View style={styles.searchHeaderSection}>
+            <View style={styles.sparksLeftContainer}>
+              <FontAwesome5 name='bolt' size={16} style={styles.sparksLeftIcon} />
+              <Text style={styles.sparksLeftText}>{this.props.sparksLeft} sparks left today</Text>
+            </View>
+          </View>
         </View>
+
         {body}
       </View>
     );
@@ -104,7 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: '100%',
     padding: 20,
-    paddingTop: 35,
+    paddingTop: 30,
     paddingBottom: 0,
   },
   picker: {
@@ -120,12 +133,14 @@ const styles = StyleSheet.create({
     zIndex: 250,
   },
   searchHeader: {
+    paddingTop: 20,
+  },
+  searchHeaderSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 20,
-    paddingBottom: 10,
     paddingLeft: 0,
     paddingRight: 0,
+    marginBottom: 10,
   },
   textContainer: {
     flexDirection: 'row',
@@ -138,22 +153,36 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   list: {
-    height: '95%', // navbar
-    paddingTop: 20,
+    paddingTop: 5,
   },
   iconLeft: {
     color: 'red',
     marginRight: 5,
   },
   iconRight: {
-    color: 'red',
+    color: '#777',
     marginLeft: 5,
+  },
+  sparksLeftContainer: {
+    backgroundColor: 'red',
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+  },
+  sparksLeftIcon: {
+    color: 'white',
+    marginRight: 5,
+  },
+  sparksLeftText: {
+    color: 'white',
   },
 });
 
 const mapStateToProps = (state) => ({
   session: state.session,
   results: state.search,
+  sparksLeft: 5 - state.sparks.filter(spark => spark.user_id === state.session.id).length,
 });
 
 const mapDispatchToProps = (dispatch) => ({

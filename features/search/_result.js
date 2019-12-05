@@ -7,10 +7,15 @@ import {sendSpark} from './_action';
 
 function Date(props) {
   const [note, setNote] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  function promptForNote() {
+    if (props.sparkSent) return;
+    setShowConfirmation(true);
+  }
 
   function sendSpark() {
-    setShowModal(false);
+    setShowConfirmation(false);
     props.sendSpark({ instadate_id: props.id, note });
   }
 
@@ -22,7 +27,7 @@ function Date(props) {
         <ActivityIcon activity={props.activity} />
       </View>
 
-      { !showModal && (<View style={styles.detailContainer}>
+      { !showConfirmation && (<View style={styles.detailContainer}>
         <View style={styles.leftDetailContainer}>
           <Text style={styles.userName}>{ props.user.name }</Text>
 
@@ -33,9 +38,9 @@ function Date(props) {
         </View>
 
         <View style={styles.rightDetailContainer}>
-          <TouchableOpacity style={styles.requestButton} onPress={() => setShowModal(true)}>
+          <TouchableOpacity style={styles.requestButton} onPress={promptForNote}>
             <Text style={styles.requestButtonText}>
-              <FontAwesome5 name='bolt' size={24} style={styles.icon} />
+              <FontAwesome5 name='bolt' size={24} style={props.sparkSent ? styles.iconSparked : styles.icon} />
             </Text>
           </TouchableOpacity>
 
@@ -43,13 +48,13 @@ function Date(props) {
         </View>
       </View>)}
 
-      { showModal && (<View style={styles.detailContainer}>
+      { showConfirmation && (<View style={styles.detailContainer}>
         <View style={styles.confirmationContainer}>
           <TextInput placeholder='Send a note... (optional)' onChangeText={val => setNote(val)}/>
 
           <View style={styles.confirmationButtonsContainer}>
             <TouchableOpacity
-              onPress={() => setShowModal(false)}
+              onPress={() => setShowConfirmation(false)}
               style={{ ...styles.confirmationButton, ...styles.cancelButton }}
             >
               <Text style={styles.confirmationButtonText}>Cancel</Text>
@@ -107,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     height: 100,
     justifyContent: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   image: {
     borderRadius: 50,
@@ -135,6 +140,9 @@ const styles = StyleSheet.create({
     color: '#ccc',
     marginRight: 5,
   },
+  iconSparked: {
+    color: 'red',
+  },
   locationText: {
     color: '#ccc',
     fontSize: 12,
@@ -151,6 +159,7 @@ const styles = StyleSheet.create({
   },
   leftDetailContainer: {
     flex: 2,
+    justifyContent: 'space-between',
   },
   rightDetailContainer: {
     alignItems: 'flex-end',
@@ -174,7 +183,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.users.find((user) => user.id == ownProps.creator_id),
+  user: state.users.find((user) => user.id === ownProps.creator_id),
+  sparkSent: state.sparks.some((spark) => spark.instadate_id === ownProps.id)
 });
 
 const mapDispatchToProps = (dispatch) => ({
