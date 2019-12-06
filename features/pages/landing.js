@@ -14,7 +14,7 @@ export default function Landing(props) {
         <TouchableOpacity
           onPress={() => navigate('Login')}
         >
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -45,6 +45,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
+    textAlign: 'center',
+  },
+  loginText: {
+    color: '#777',
     textAlign: 'center',
   },
   signUpButtonText: {

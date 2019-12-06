@@ -18,12 +18,12 @@ export default function BackButton(props) {
 
 const styles = StyleSheet.create({
   container: {
-    left: 20,
+    left: 35,
     position: 'absolute',
     top: 60,
     zIndex: 100,
   },
   text: {
-    color: 'white',
+    color: '#777',
   },
 });
