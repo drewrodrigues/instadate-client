@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {FontAwesome5} from '@expo/vector-icons';
 import ActivityIcon from '../../components/activityIcon';
 import {sendSpark} from './_action';
+import {anySparksLeft} from "./_selectors";
+import {milesAwayFormatter} from "./_formatters";
 
 function Date(props) {
   const [note, setNote] = useState(null);
@@ -11,6 +13,16 @@ function Date(props) {
 
   function promptForNote() {
     if (props.sparkSent) return;
+    if (!props.anySparksLeft) {
+      // TODO: implement subscription
+      return Alert.alert(
+        'No sparks left',
+        'Upgrade to premium for unlimited sparks',
+        [
+          {text: 'Subscribe'}
+        ]
+      )
+    }
     setShowConfirmation(true);
   }
 
@@ -44,7 +56,7 @@ function Date(props) {
             </Text>
           </TouchableOpacity>
 
-          <Text style={styles.distance}>{props.distance} miles away</Text>
+          <Text style={styles.distance}>{milesAwayFormatter(props.distance)}</Text>
         </View>
       </View>)}
 
@@ -184,7 +196,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.users.find((user) => user.id === ownProps.creator_id),
-  sparkSent: state.sparks.some((spark) => spark.instadate_id === ownProps.id)
+  sparkSent: state.sparks.some((spark) => spark.instadate_id === ownProps.id),
+  anySparksLeft: anySparksLeft(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

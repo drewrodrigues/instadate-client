@@ -9,6 +9,8 @@ import {FontAwesome5} from '@expo/vector-icons';
 import {NavigationEvents} from 'react-navigation';
 import Loading from '../../components/loading';
 import Picker from '../../components/picker';
+import {sparksLeft} from "./_selectors";
+import {sparksLeftFormatter} from "./_formatters";
 
 class Search extends React.Component {
   constructor(props) {
@@ -98,10 +100,14 @@ class Search extends React.Component {
           </View>
 
           <View style={styles.searchHeaderSection}>
-            <View style={styles.sparksLeftContainer}>
-              <FontAwesome5 name='bolt' size={16} style={styles.sparksLeftIcon} />
-              <Text style={styles.sparksLeftText}>{this.props.sparksLeft} sparks left today</Text>
-            </View>
+            {!this.state.loading && (
+              <View style={styles.sparksLeftContainer}>
+                <FontAwesome5 name='bolt' size={16} style={styles.sparksLeftIcon} />
+                <Text style={styles.sparksLeftText}>
+                  {sparksLeftFormatter(this.props.sparksLeft)}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
 
@@ -182,7 +188,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   session: state.session,
   results: state.search,
-  sparksLeft: 5 - state.sparks.filter(spark => spark.user_id === state.session.id).length,
+  sparksLeft: sparksLeft(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
