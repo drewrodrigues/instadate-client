@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     top: 50,
-    right: 20,
+    left: 20,
   },
   detailContainer: {
     backgroundColor: 'white',
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
   },
   userAge: {
     color: '#e4555f',
-    fontSize: 32,
-    fontWeight: '400',
+    fontSize: 24,
+    fontWeight: '700',
   },
   subDetail: {
     color: '#777',
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({
-  user: state.session,
+const mapStateToProps = (state, ownProps) => ({
+  user: (ownProps.userId ? state.users.find(user => user.id === ownProps.userId) : state.session),
 });
 
 export default connect(mapStateToProps)(Profile);

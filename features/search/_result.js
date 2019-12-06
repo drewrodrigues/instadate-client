@@ -6,10 +6,12 @@ import ActivityIcon from '../../components/activityIcon';
 import {sendSpark} from './_action';
 import {anySparksLeft} from "./_selectors";
 import {milesAwayFormatter} from "./_formatters";
+import ProfileModal from "./_profileModal";
 
 function Date(props) {
   const [note, setNote] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   function promptForNote() {
     if (props.sparkSent) return;
@@ -32,8 +34,17 @@ function Date(props) {
   }
 
   return (
-    <View style={styles.container}>
-      { props.user.picture && <Image source={props.user.picture} style={styles.image}/> }
+    <TouchableOpacity style={styles.container} onPress={() => setShowProfile(true)}>
+      { props.user.picture && (
+          <Image
+            source={props.user.picture}
+            style={styles.image}
+          />
+      )}
+
+      { showProfile && (
+        <ProfileModal close={() => setShowProfile(false)} userId={props.user.id}/>
+      )}
 
       <View style={styles.activityIconContainer}>
         <ActivityIcon activity={props.activity} />
@@ -82,7 +93,7 @@ function Date(props) {
           </View>
         </View>
       </View>)}
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -183,6 +194,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   requestButton: {
+    padding: 20,
+    marginTop: -20,
+    marginRight: -20,
   },
   requestButtonText: {
     color: '#e9ebee',
@@ -191,6 +205,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     marginBottom: 10,
+  },
+  profileButtonContainer: {
+    zIndex: 100,
   },
 });
 
