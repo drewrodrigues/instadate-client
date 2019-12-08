@@ -17,13 +17,10 @@ function Spark(props) {
             <Text style={styles.age}>{props.user.age}</Text>
           </View>
           <Text style={styles.location}>{props.user.location}</Text>
+          <Text style={styles.noteText}>{props.note}</Text>
         </View>
       </View>
 
-
-      <View style={styles.noteContainer}>
-        <Text>{props.note}</Text>
-      </View>
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.blockButton}>
@@ -53,12 +50,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginBottom: 20,
+    padding: 20,
   },
   header: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 20,
+    marginBottom: 10,
   },
   headerDetail: {
     alignItems: 'stretch',
@@ -84,12 +82,14 @@ const styles = StyleSheet.create({
   age: {
   },
   location: {
+    color: '#ccc',
+    marginBottom: 10,
   },
   buttonContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    marginTop: 10,
   },
   rightButtonsContainer: {
     flexDirection: 'row',
@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeee',
     flexDirection: 'row',
     padding: 5,
-    paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 5,
   },
@@ -119,7 +118,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     padding: 5,
     paddingLeft: 10,
-    paddingRight: 10,
     borderRadius: 5,
   },
   buttonIcon: {
@@ -128,10 +126,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-  },
-  noteContainer: {
-    backgroundColor: '#eee',
-    padding: 20,
   },
 });
 
