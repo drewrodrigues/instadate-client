@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
+import ProfilablePicture from "../../components/profilablePicture";
 
 function Spark(props) {
   if (!props.user) return null;
@@ -9,7 +10,7 @@ function Spark(props) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        { props.user.picture && <Image source={props.user.picture} style={styles.userImage}/> }
+        <ProfilablePicture picture={props.user.picture} userId={props.user.id} />
         <View style={styles.headerDetail}>
           <View style={styles.nameAndAgeContainer}>
             <Text style={styles.name}>{props.user.name}</Text>

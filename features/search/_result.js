@@ -6,7 +6,7 @@ import ActivityIcon from '../../components/activityIcon';
 import {sendSpark} from './_action';
 import {anySparksLeft} from "./_selectors";
 import {milesAwayFormatter} from "./_formatters";
-import ProfileModal from "./_profileModal";
+import ProfileModal from "../../components/profileModal";
 
 function Date(props) {
   const [note, setNote] = useState(null);

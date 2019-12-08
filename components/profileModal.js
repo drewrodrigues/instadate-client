@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import Profile from '../profile/profile';
+import Profile from '../features/profile/profile';
 import {FontAwesome5} from "@expo/vector-icons";
 
 export default class ProfileModal extends React.Component {

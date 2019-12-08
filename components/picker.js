@@ -3,11 +3,11 @@ import {Alert, Picker, StyleSheet, Text, TouchableOpacity, View} from 'react-nat
 
 export default function PickerWithButton({close, updateCallback, value}) {
   function checkForPremiumAndUpdate(value) {
-    if (value > 15) {
-      Alert.alert('Premium Required', 'Please subscribe to search above 10 miles');
-    } else {
-      updateCallback(value);
-    }
+    // if (value > 15) {
+    //   Alert.alert('Premium Required', 'Please subscribe to search above 10 miles');
+    // } else {
+    // }
+    updateCallback(value);
   }
 
   return (
