@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   headerText: {
-    color: 'white',
+    color: '#222',
     fontSize: 20,
     fontWeight: '700',
     textAlign: 'center',

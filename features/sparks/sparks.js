@@ -27,28 +27,32 @@ class Sparks extends Component {
 
   render() {
     if (this.state.loading) return (
-      <View>
+      <View style={styles.container}>
         <NavigationEvents onWillFocus={this.getSparks} />
         <Loading />
       </View>
     );
 
+    const anySparks = this.props.sparks.length > 0;
+
     return (
       <View style={styles.container}>
         <NavigationEvents onWillFocus={this.getSparks} />
-        <FlatList
-          data={this.props.sparks}
-          renderItem={({item}) => <Spark {...item}/>}
-          keyExtractor={(item) => item.id}
-          style={styles.flatList}
-        />
-        {/*<Placeholder*/}
-        {/*  icon={Request}*/}
-        {/*  headerText="You don't have any requests, yet"*/}
-        {/*  subText="Don't worry, they'll flow in soon"*/}
-        {/*/>*/}
-
-        {/*{this.props.sparks.map(spark => <Spark key={spark.id} {...spark} />)}*/}
+        {anySparks ? (
+          <FlatList
+            data={this.props.sparks}
+            renderItem={({item}) => <Spark {...item}/>}
+            keyExtractor={(item) => item.id}
+            style={styles.flatList}
+          />
+        ) : (
+          <Placeholder
+            icon={Request}
+            headerText="You don't have any sparks"
+            style={styles.placeholder}
+            subText="Try sending sparks or creating a date"
+          />
+        )}
       </View>
     );
   }
@@ -56,6 +60,8 @@ class Sparks extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
     height: '100%',
     paddingLeft: 20,
