@@ -1,4 +1,4 @@
-import {RECEIVE_SPARK, RECEIVE_SPARKS} from "./_actions";
+import {RECEIVE_SPARK, RECEIVE_SPARKS, REMOVE_SPARK} from "./_actions";
 
 export default function(oldState = [], action) {
   Object.assign(oldState);
@@ -10,6 +10,8 @@ export default function(oldState = [], action) {
     return newState;
   case RECEIVE_SPARKS:
     return action.sparks;
+  case REMOVE_SPARK:
+    return oldState.filter(spark => spark.id != action.id);
   default:
     return oldState;
   }

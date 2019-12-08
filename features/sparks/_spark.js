@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 import ProfilablePicture from "../../components/profilablePicture";
+import {denySpark} from "./_actions";
 
 function Spark(props) {
   if (!props.user) return null;
@@ -29,7 +30,7 @@ function Spark(props) {
         </TouchableOpacity>
 
         <View style={styles.rightButtonsContainer}>
-          <TouchableOpacity style={styles.denyButton}>
+          <TouchableOpacity style={styles.denyButton} onPress={props.denySpark}>
             <FontAwesome5 name='times' size={12} style={styles.buttonIcon} />
             <Text style={styles.buttonText}>Deny</Text>
           </TouchableOpacity>
@@ -129,10 +130,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    user: state.users.find(user => user.id === ownProps.user_id)
-  }
-};
+const mapStateToProps = (state, ownProps) => ({
+  user: state.users.find(user => user.id === ownProps.user_id)
+});
 
-export default connect(mapStateToProps)(Spark);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  denySpark: () => dispatch(denySpark(ownProps.id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Spark);
