@@ -27,7 +27,7 @@ class Sparks extends Component {
 
   render() {
     if (this.state.loading) return (
-      <View style={styles.container}>
+      <View style={styles.placeholderContainer}>
         <NavigationEvents onWillFocus={this.getSparks} />
         <Loading />
       </View>
@@ -60,13 +60,15 @@ class Sparks extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
     flex: 1,
     height: '100%',
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 40,
+  },
+  placeholderContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   flatList: {
     height: '100%',
