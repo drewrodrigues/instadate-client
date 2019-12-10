@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import ProfileModal from "./profileModal";
 
-export default function ProfilablePicture({
+function ProfilablePicture({
   picture,
   userId
 }) {
@@ -19,6 +20,12 @@ export default function ProfilablePicture({
     </TouchableOpacity>
   )
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  picture: state.users.find(user => user.id === ownProps.userId).picture
+});
+
+export default connect(mapStateToProps)(ProfilablePicture);
 
 const styles = StyleSheet.create({
   picture: {

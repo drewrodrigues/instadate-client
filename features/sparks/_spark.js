@@ -11,7 +11,7 @@ function Spark(props) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <ProfilablePicture picture={props.user.picture} userId={props.user.id} />
+        <ProfilablePicture userId={props.user.id} />
         <View style={styles.headerDetail}>
           <View style={styles.nameAndAgeContainer}>
             <Text style={styles.name}>{props.user.name}</Text>
