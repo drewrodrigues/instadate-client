@@ -18,11 +18,11 @@ function Settings(props) {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'red',
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    padding: 50,
   },
   icon: {
     color: '#ccc',
