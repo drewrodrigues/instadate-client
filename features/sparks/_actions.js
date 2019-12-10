@@ -1,5 +1,6 @@
 import axios from '../../config/axios';
 import {receiveUsers} from "../users/_actions";
+import {receiveConversation} from "../conversations/_actions";
 
 export const RECEIVE_SPARK = 'RECEIVE_SPARK';
 export const RECEIVE_SPARKS = 'RECEIVE_SPARKS';
@@ -50,14 +51,33 @@ export const denySpark = (id) => (dispatch) => {
     url: `/sparks/${id}`
   })
     .then((response) => {
-      dispatch({type: 'DENY_SPARK_SUCCESS'});
+      dispatch({type: 'DENY_SPARK_SUCCESS', response});
       dispatch(removeSpark(response.data.id));
 
       return Promise.resolve(response);
     })
     .catch((error) => {
-      dispatch({type: 'DENY_SPARK_FAIL'});
+      dispatch({type: 'DENY_SPARK_FAIL', error});
 
+      return Promise.reject(error);
+    });
+};
+
+export const acceptSpark = (id) => (dispatch) => {
+  dispatch({type: 'ACCEPT_SPARK_START'});
+
+  return axios({
+    method: 'post',
+    url: '/conversations',
+    data: { conversation: { spark_id: id }}
+  })
+    .then((response) => {
+      dispatch({type: 'ACCEPT_SPARK_SUCCESS', response});
+      dispatch(removeSpark(id));
+      dispatch(receiveConversation(response.data));
+    })
+    .catch((error) => {
+      dispatch({type: 'ACCEPT_SPARK_FAIL', error});
       return Promise.reject(error);
     });
 };

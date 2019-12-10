@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 import ProfilablePicture from "../../components/profilablePicture";
-import {denySpark} from "./_actions";
+import {denySpark, acceptSpark} from "./_actions";
 
 function Spark(props) {
   if (!props.user) return null;
@@ -35,7 +35,7 @@ function Spark(props) {
             <Text style={styles.buttonText}>Deny</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.acceptButton}>
+          <TouchableOpacity style={styles.acceptButton} onPress={props.acceptSpark}>
             <FontAwesome5 name='check' size={12} style={styles.buttonIcon} />
             <Text style={styles.buttonText}>Accept</Text>
           </TouchableOpacity>
@@ -135,7 +135,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  denySpark: () => dispatch(denySpark(ownProps.id))
+  denySpark: () => dispatch(denySpark(ownProps.id)),
+  acceptSpark: (id) => dispatch(acceptSpark(ownProps.id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Spark);

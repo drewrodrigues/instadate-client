@@ -11,6 +11,7 @@ import Login from '../features/session/login';
 import Landing from '../features/pages/landing';
 import Search from '../features/search/search';
 import Dates from '../features/dates/dates';
+import Conversations from '../features/conversations/converations';
 import Profile from '../features/profile/profile';
 import Settings from '../features/settings/settings';
 import Sparks from '../features/sparks/sparks';
@@ -46,11 +47,11 @@ function Navigation(props) {
       },
       Dates: {
         screen: function() {
-          return <Dates />;
+          return <Conversations />;
         },
         navigationOptions: () => ({
           tabBarIcon: ({tintColor}) => (
-            <FontAwesome name='bolt' size={42} color={tintColor} />
+            <FontAwesome name='comments' size={42} color={tintColor} />
           ),
         }),
       },

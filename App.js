@@ -7,6 +7,7 @@ import sessionReducer from './features/session/_reducer';
 import {AsyncStorage} from 'react-native';
 import datesReducer from './features/dates/_reducer';
 import permissionsReducer from './features/permissions/_reducer';
+import conversationsReducer from './features/conversations/_reducer';
 import searchReducer from './features/search/_reducer';
 import sparksReducer from './features/sparks/_reducer';
 import userReducer from './features/users/_reducer';
@@ -38,6 +39,7 @@ export default class App extends React.Component {
       store: createStore(
         combineReducers({
           session: sessionReducer,
+          conversations: conversationsReducer,
           dates: datesReducer,
           permissions: permissionsReducer,
           search: searchReducer,
