@@ -1,5 +1,6 @@
 import axios from '../../config/axios';
 import {AsyncStorage} from 'react-native';
+import {getCoordinates} from "../permissions/_actions";
 
 export const RECEIVE_SESSION = 'RECEIVE_SESSION';
 
@@ -8,13 +9,16 @@ const receiveSession = (session) => ({
   session,
 });
 
-export const signUp = (user) => (dispatch) => {
+export const signUp = (user) => async (dispatch) => {
   dispatch({type: 'SIGN_UP_START'});
+
+  const {latitude, longitude} = await getCoordinates();
+  user = Object.assign(user, latitude, longitude);
 
   return axios({
     method: 'post',
     url: '/users',
-    data: {user},
+    data: {user: {...user, latitude, longitude}},
   })
     .then((res) => {
       dispatch(receiveSession(res.data));

@@ -17,7 +17,7 @@ function Spark(props) {
             <Text style={styles.name}>{props.user.name}</Text>
             <Text style={styles.age}>{props.user.age}</Text>
           </View>
-          <Text style={styles.location}>{props.user.location}</Text>
+          <Text style={styles.location}>{props.user.city}</Text>
           <Text style={styles.noteText}>{props.note}</Text>
         </View>
       </View>

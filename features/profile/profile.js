@@ -33,7 +33,7 @@ function Profile(props) {
         </View>
 
         <View>
-          <Text style={styles.subDetail}>From { props.user.location }</Text>
+          <Text style={styles.subDetail}>From { props.user.city }</Text>
           <Text style={styles.subDetail}>Interested in { props.user.interested_in.join(' and ') }</Text>
           <Text style={styles.subDetail}>Looking for { props.user.outcomes.join(' or ') }</Text>
         </View>

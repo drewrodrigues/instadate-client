@@ -19,7 +19,6 @@ import BackButton from '../../components/backButton';
 import {signUp} from './_actions';
 import {uploadImage} from '../imageUpload/_actions';
 import PictureVerificationTag from '../../components/pictureVerificationTag';
-import LocationSearchInput from '../../components/locationSearchInput';
 
 function SignUp(props) {
   const [errors, setErrors] = useState([]);
@@ -31,7 +30,6 @@ function SignUp(props) {
   const [bio, setBio] = useState('');
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-  const [location, setLocation] = useState('');
   const [picture, setPicture] = useState({}); // to store the file for placeholder
   const [uploadedImage, setUploadedImage] = useState({}); // for posting
 
@@ -41,7 +39,6 @@ function SignUp(props) {
       password,
       sex,
       interested_in: interestedIn,
-      location,
       age,
       outcomes: lookingFor,
       bio,
@@ -135,9 +132,6 @@ function SignUp(props) {
             updateCallback={setAge}
             value={age}
           />
-
-          {/* Location */}
-          <LocationSearchInput placeholder='Location' callback={setLocation} value={location}/>
 
           {/* Bio */}
           <FormTextInput
