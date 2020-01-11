@@ -36,10 +36,10 @@ function Date(props) {
   return (
     <TouchableOpacity style={styles.container} onPress={() => setShowProfile(true)}>
       { props.user.picture && (
-          <Image
-            source={props.user.picture}
-            style={styles.image}
-          />
+        <Image
+          source={props.user.picture}
+          style={styles.image}
+        />
       )}
 
       { showProfile && (
