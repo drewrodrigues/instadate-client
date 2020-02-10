@@ -16,7 +16,6 @@ function Date(props) {
   function promptForNote() {
     if (props.sparkSent) return;
     if (!props.anySparksLeft) {
-      // TODO: implement subscription
       return Alert.alert(
         'No sparks left',
         'Upgrade to premium for unlimited sparks',

@@ -22,9 +22,28 @@ export const getConversations = () => (dispatch) => {
     url: '/conversations'
   })
     .then((response) => {
-      dispatch({type: 'GET_CONVERSATION_SUCCESS', response});
+      dispatch({type: 'GET_CONVERSATIONS_SUCCESS', response});
       dispatch(receiveConversations(response.data.conversations));
       dispatch(receiveUsers(response.data.users));
+      return Promise.resolve(response);
+    })
+    .catch((error) => {
+      dispatch({type: 'GET_CONVERSATIONS_FAIL', error});
+      return Promise.reject(error);
+    });
+};
+
+export const getConversation = (id) => (dispatch) => {
+  dispatch({type: 'GET_CONVERSATION_START'});
+
+  return axios({
+    method: 'get',
+    url: `/conversations/${id}`
+  })
+    .then((response) => {
+      dispatch({type: 'GET_CONVERSATION_SUCCESS', response});
+      dispatch(receiveConversation(response.data.conversation));
+
       return Promise.resolve(response);
     })
     .catch((error) => {

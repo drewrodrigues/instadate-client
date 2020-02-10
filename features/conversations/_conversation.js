@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {otherUser} from "./_selectors";
 import ProfilablePicture from "../../components/profilablePicture";
 
@@ -8,7 +8,7 @@ function Conversation(props) {
   if (!props.otherUser) return null;
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => props.showConversation(props.id)}>
       <ProfilablePicture userId={props.otherUser.id} />
 
       <View style={styles.conversationDetail}>
@@ -20,7 +20,7 @@ function Conversation(props) {
         </View>
         <Text style={styles.message}>The last message that was sent goes here</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

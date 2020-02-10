@@ -5,9 +5,7 @@ export default function(oldState = [], action) {
 
   switch (action.type) {
   case RECEIVE_CONVERSATION:
-    const newConversations = Array.from(oldState);
-    newConversations.push(action.conversation);
-    return newConversations;
+    return [action.conversation];
   case RECEIVE_CONVERSATIONS:
     return action.conversations;
   default:
