@@ -20,6 +20,8 @@ function Conversations(props) {
 
   if (shownConversation) {
     return <ConversationModal
+      conversation={shownConversation}
+      otherUser={shownConversation.otherUser}
       id={shownConversation}
       close={() => showConversation(null) }
     />

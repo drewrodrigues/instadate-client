@@ -8,7 +8,7 @@ function Conversation(props) {
   if (!props.otherUser) return null;
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => props.showConversation(props.id)}>
+    <TouchableOpacity style={styles.container} onPress={() => props.showConversation({ ...props, otherUser: props.otherUser})}>
       <ProfilablePicture userId={props.otherUser.id} />
 
       <View style={styles.conversationDetail}>
