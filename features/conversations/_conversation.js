@@ -14,11 +14,10 @@ function Conversation(props) {
       <View style={styles.conversationDetail}>
         <View style={styles.conversationDetailHeader}>
           <Text style={styles.name}>{props.otherUser.name}</Text>
-          <View style={styles.messagesLeftIndicator}>
-            <Text style={styles.messagesLeftIndicatorText}>9 messages Left</Text>
-          </View>
         </View>
-        <Text style={styles.message}>The last message that was sent goes here</Text>
+        {props.lastMessage && (
+          <Text style={styles.message}>{props.lastMessage.body}</Text>
+        )}
       </View>
     </TouchableOpacity>
   )
@@ -26,7 +25,8 @@ function Conversation(props) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    otherUser: otherUser(state, ownProps.accepting_user_id, ownProps.requesting_user_id)
+    otherUser: otherUser(state, ownProps.accepting_user_id, ownProps.requesting_user_id),
+    lastMessage: state.messages.find(message => message.conversation_id === ownProps.id)
   }
 };
 
@@ -53,15 +53,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: '700',
-  },
-  messagesLeftIndicator: {
-    backgroundColor: 'red',
-    borderRadius: 10,
-    padding: 5,
-  },
-  messagesLeftIndicatorText: {
-    color: 'white',
-    fontSize: 12,
   },
   message: {
     color: '#777',

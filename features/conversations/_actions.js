@@ -25,6 +25,7 @@ export const getConversations = () => (dispatch) => {
     .then((response) => {
       dispatch({type: 'GET_CONVERSATIONS_SUCCESS', response});
       dispatch(receiveConversations(response.data.conversations));
+      dispatch(receiveMessages(response.data.messages));
       dispatch(receiveUsers(response.data.users));
       return Promise.resolve(response);
     })
