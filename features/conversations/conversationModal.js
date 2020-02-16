@@ -6,6 +6,8 @@ import Loading from "../../components/loading";
 import {getConversation} from './_actions';
 import ProfilablePicture from "../../components/profilablePicture";
 import AddMessageInput from "../messages/addMessageInput";
+import Placeholder from "../../components/placeholder";
+import messagePlaceholder from '../../assets/messagePlaceholder.png';
 
 class ConversationModal extends React.Component {
   constructor(props) {
@@ -36,6 +38,26 @@ class ConversationModal extends React.Component {
       </View>
     </Modal>;
 
+    if (this.props.messages.length === 0) {
+      return <Modal>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={this.props.close} style={styles.closeButton}>
+              <Text>Close</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Placeholder
+            icon={messagePlaceholder}
+            headerText="No messages yet"
+            subText="Start it off"
+          />
+
+          <AddMessageInput conversationId={this.props.conversation.id}/>
+        </View>
+      </Modal>
+    }
+
     return (
       <Modal>
         <KeyboardAvoidingView behavior='padding' style={styles.container} enabled>
@@ -54,7 +76,7 @@ class ConversationModal extends React.Component {
 
           <View style={styles.content}>
             {this.props.messages.map(message => (
-              <View style={styles.otherUserMessage}>
+              <View style={styles.otherUserMessage} key={message}>
                 <Text>{message.body}</Text>
               </View>
             ))}
@@ -102,6 +124,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   header: {
+    marginBottom: 20,
     position: 'relative',
   },
   closeButton: {
