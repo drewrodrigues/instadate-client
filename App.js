@@ -8,6 +8,7 @@ import {AsyncStorage} from 'react-native';
 import datesReducer from './features/dates/_reducer';
 import permissionsReducer from './features/permissions/_reducer';
 import conversationsReducer from './features/conversations/_reducer';
+import messagesReducer from './features/messages/_reducer';
 import searchReducer from './features/search/_reducer';
 import sparksReducer from './features/sparks/_reducer';
 import userReducer from './features/users/_reducer';
@@ -41,6 +42,7 @@ export default class App extends React.Component {
           session: sessionReducer,
           conversations: conversationsReducer,
           dates: datesReducer,
+          messages: messagesReducer,
           permissions: permissionsReducer,
           search: searchReducer,
           sparks: sparksReducer,
