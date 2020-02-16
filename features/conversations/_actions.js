@@ -1,5 +1,6 @@
 import axios from '../../config/axios';
 import {receiveUsers} from "../users/_actions";
+import {receiveMessages} from '../messages/_actions';
 
 export const RECEIVE_CONVERSATION = 'RECEIVE_CONVERSATION';
 export const RECEIVE_CONVERSATIONS = 'RECEIVE_CONVERSATIONS';
@@ -43,7 +44,7 @@ export const getConversation = (id) => (dispatch) => {
     .then((response) => {
       dispatch({type: 'GET_CONVERSATION_SUCCESS', response});
       dispatch(receiveConversation(response.data.conversation));
-
+      dispatch(receiveMessages(response.data.messages));
       return Promise.resolve(response);
     })
     .catch((error) => {

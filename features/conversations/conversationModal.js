@@ -53,25 +53,27 @@ class ConversationModal extends React.Component {
           </View>
 
           <View style={styles.content}>
-            <View style={styles.otherUserMessage}>
-              <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
-            </View>
+            {this.props.messages.map(message => (
+              <View style={styles.otherUserMessage}>
+                <Text>{message.body}</Text>
+              </View>
+            ))}
 
-            <View style={styles.myMessage}>
-              <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
-            </View>
+            {/*<View style={styles.myMessage}>*/}
+            {/*  <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>*/}
+            {/*</View>*/}
 
-            <View style={styles.otherUserMessage}>
-              <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
-            </View>
+            {/*<View style={styles.otherUserMessage}>*/}
+            {/*  <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>*/}
+            {/*</View>*/}
 
-            <View style={styles.otherUserMessage}>
-              <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
-            </View>
+            {/*<View style={styles.otherUserMessage}>*/}
+            {/*  <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>*/}
+            {/*</View>*/}
 
-            <View style={styles.myMessage}>
-              <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
-            </View>
+            {/*<View style={styles.myMessage}>*/}
+            {/*  <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>*/}
+            {/*</View>*/}
           </View>
 
           <AddMessageInput conversationId={this.props.conversation.id}/>
@@ -82,7 +84,9 @@ class ConversationModal extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    messages: state.messages.filter(message => message.conversation_id === ownProps.conversation.id)
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
