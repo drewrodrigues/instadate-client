@@ -5,6 +5,7 @@ import {NavigationEvents} from "react-navigation";
 import Loading from "../../components/loading";
 import {getConversation} from './_actions';
 import ProfilablePicture from "../../components/profilablePicture";
+import AddMessageInput from "../messages/addMessageInput";
 
 class ConversationModal extends React.Component {
   constructor(props) {
@@ -73,13 +74,7 @@ class ConversationModal extends React.Component {
             </View>
           </View>
 
-          <View style={styles.messageSendContainer}>
-            <TextInput style={styles.messageInput} placeholder="Type a message here" />
-
-            <TouchableOpacity style={styles.messageSendButton}>
-              <Text style={styles.messageSendText}>Send</Text>
-            </TouchableOpacity>
-          </View>
+          <AddMessageInput conversationId={this.props.conversation.id}/>
         </KeyboardAvoidingView>
       </Modal>
     );
@@ -149,28 +144,6 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginTop: 10,
   },
-  messageSendContainer: {
-    alignItems: 'center',
-    backgroundColor: '#ccc',
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 25,
-    marginTop: 10,
-    overflow: 'hidden',
-  },
-  messageInput: {
-    flex: 4,
-    padding: 20,
-  },
-  messageSendButton: {
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  messageSendText: {
-    color: 'white',
-  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConversationModal);

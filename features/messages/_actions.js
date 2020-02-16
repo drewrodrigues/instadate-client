@@ -1,3 +1,5 @@
+import axios from '../../config/axios';
+
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 export const RECEIVE_MESSAGES = 'RECEIVE_MESSAGES';
 
@@ -11,12 +13,13 @@ export const receiveMessages = (messages) => ({
   messages
 });
 
-export const sendMessage = () => (dispatch) => {
+export const sendMessage = (message) => (dispatch) => {
   dispatch({type: 'SEND_MESSAGE_START'});
 
   return axios({
     method: 'post',
-    url: '/messages'
+    url: '/messages',
+    data: {message}
   })
     .then((response) => {
       dispatch({type: 'SEND_MESSAGE_SUCCESS', response});

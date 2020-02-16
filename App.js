@@ -16,6 +16,11 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 console.disableYellowBox = true;
 
+import {receiveMessage, receiveMessages, sendMessage} from "./features/messages/_actions";
+window.receiveMessage = receiveMessage
+window.receiveMessages = receiveMessages
+window.sendMessage = sendMessage
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
