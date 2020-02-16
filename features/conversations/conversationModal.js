@@ -70,7 +70,7 @@ class ConversationModal extends React.Component {
           </View>
 
           <View style={styles.messagesLeftContainer}>
-            <Text style={styles.messagesLeftText}>5 Messages Left</Text>
+            <Text style={styles.messagesLeftText}>{10 - this.props.messages.length} Messages Left</Text>
             <Text style={styles.messagesSubtext}>Get to know the basics of each other and get to a date!</Text>
           </View>
 
